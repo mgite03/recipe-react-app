@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "username": "tsairyan",
+    "firstName": "Ryan",
+    "lastName": "Tsai",
+    "password": "12345",
+    "accountType": "Casual"
+  },
+  {
+    "id": 2,
+    "username": "pro_cook",
+    "firstName": "Professional",
+    "lastName": "Cook",
+    "password": "123",
+    "accountType": "Professional"
+  }
+]
