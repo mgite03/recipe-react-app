@@ -1,15 +1,18 @@
 import "./login.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   async function handleLogin() {
     const userData = { username, password };
     let x = await AccountService.loginAccount(userData);
     if (x) {
       console.log("ACCOUNT FOUND");
+      navigate(`../profile/${x.username}`);
     } else {
       console.log("NO ACCOUNT FOUND");
     }

@@ -18,6 +18,14 @@ export const signup = async (credentials) => {
   const response = await axios.post(`${ACCOUNTS_URL}/register`, credentials);
   return response.data;
 };
+export const signout = async () => {
+  const response = await axios.post(`${ACCOUNTS_URL}/signout`);
+  return response.data;
+};
+export const updateUser = async (user) => {
+  const response = await axios.put(`${ACCOUNTS_URL}/${user.username}`, user);
+  return response.data;
+};
 
 export const loginAccount = async (userData) => {
   try {
@@ -26,5 +34,14 @@ export const loginAccount = async (userData) => {
     return response.data;
   } catch (err) {
     console.log("did not work");
+  }
+};
+
+export const getAccount = async (username) => {
+  try {
+    const response = await axios.get(`${ACCOUNTS_URL}/${username}`);
+    return response.data;
+  } catch (err) {
+    console.log("couldn't find");
   }
 };

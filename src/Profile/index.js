@@ -1,5 +1,164 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import * as AccountService from "../services/AccountService";
+
 const Profile = () => {
-  return <>profile</>;
+  const { username } = useParams();
+  const [user, setUser] = useState(null);
+  const [editState, setEditState] = useState(false);
+  const navigate = useNavigate();
+  const signout = async () => {
+    await AccountService.signout();
+    setUser(null);
+    navigate("../profile");
+  };
+  const [account, setAccount] = useState(null);
+
+  const [usernameField, setUsernameField] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [accountType, setAccountType] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const data = await AccountService.getAccount(username);
+      setUser(data);
+      setUsernameField(data.username);
+      setPassword(data.password);
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
+      setAccountType(data.accountType);
+      console.log(data);
+    } catch (err) {
+      console.log("NOT FOUND IN LOAD");
+      console.log(user);
+    }
+  };
+
+  const handleChanges = async () => {
+    console.log("RUN");
+    const updatedAccount = {
+      username: usernameField,
+      password,
+      firstName,
+      lastName,
+      accountType,
+    };
+
+    setAccount(updatedAccount);
+
+    try {
+      console.log("ACCOUNT IS ", updatedAccount);
+      await AccountService.updateUser(updatedAccount);
+      setEditState(false);
+      setUser(updatedAccount);
+    } catch (err) {
+      console.log("ERROR");
+    }
+  };
+
+  useEffect(() => {
+    if (username) {
+      try {
+        fetchData();
+      } catch (e) {}
+    }
+  }, []);
+
+  return (
+    <div className="profile-page">
+      {!editState ? (
+        <button
+          className="editProfile"
+          onClick={() => {
+            setEditState(!editState);
+          }}
+        >
+          Edit Profile
+        </button>
+      ) : (
+        <></>
+      )}
+      {user ? (
+        <div className="personal-info">
+          Signed in as{" "}
+          {editState ? (
+            <input
+              value={usernameField}
+              onChange={(e) => setUsernameField(e.target.value)}
+            />
+          ) : (
+            <span>{user.username}</span>
+          )}
+          {editState ? (
+            <>
+              <label for="userTypePro">Professional</label>
+              <input
+                type="radio"
+                id="userTypePro"
+                name="userType"
+                onChange={() => setAccountType("Professional")}
+                checked={accountType === "Professional"}
+              />
+              <label for="userTypeCas">Casual</label>
+              <input
+                type="radio"
+                id="userTypeCas"
+                name="userType"
+                onChange={() => setAccountType("Casual")}
+                checked={accountType === "Casual"}
+              />
+            </>
+          ) : (
+            <span>{user.accountType}</span>
+          )}
+          {editState ? (
+            <input
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          ) : (
+            <span>{user.firstName}</span>
+          )}
+          {editState ? (
+            <input
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          ) : (
+            <span>{user.lastName}</span>
+          )}
+          {editState ? (
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          ) : (
+            <></>
+          )}
+          <button onClick={signout}>Signout</button>
+          {editState ? (
+            <div className="editButtons">
+              <button className="saveChanges" onClick={handleChanges}>
+                Save
+              </button>
+              <button
+                className="cancelChanges"
+                onClick={() => setEditState(!editState)}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <>Not signed in</>
+      )}
+    </div>
+  );
 };
 
 export default Profile;
