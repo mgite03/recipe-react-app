@@ -19,8 +19,10 @@ function App() {
         <Routes>
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/search" element={<Search/>}/>
-          <Route path="/search/:searchQuery" element={<SearchResults/>}/>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/search/:searchQuery" element={<SearchResults />} />
         </Routes>
       </div>
     </BrowserRouter>
