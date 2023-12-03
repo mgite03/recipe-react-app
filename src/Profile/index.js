@@ -10,7 +10,7 @@ const Profile = () => {
   const signout = async () => {
     await AccountService.signout();
     setUser(null);
-    navigate("../profile");
+    navigate("../login");
   };
   const [account, setAccount] = useState(null);
 
@@ -111,7 +111,7 @@ const Profile = () => {
               />
             </>
           ) : (
-            <span>{user.accountType}</span>
+            <span>{accountType}</span>
           )}
           {editState ? (
             <input

@@ -38,7 +38,7 @@ const Login = () => {
         <button onClick={handleLogin} className="backtoLogin">
           Login
         </button>
-        <Link to="/signup">
+        <Link to="/register">
           <button className="createAccount">Create Account</button>
         </Link>
       </div>
