@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
 
 const Profile = () => {
   const { username } = useParams();
@@ -19,6 +20,10 @@ const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [accountType, setAccountType] = useState(null);
+
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [likes, setLikes] = useState([]);
   function initFields(data) {
     setUser(data);
     setUsernameField(data.username);
@@ -26,6 +31,10 @@ const Profile = () => {
     setFirstName(data.firstName);
     setLastName(data.lastName);
     setAccountType(data.accountType);
+    setFollowers(data.followers);
+    setFollowing(data.follows);
+    setLikes(data.likes);
+    console.log("DATA", data);
   }
   const fetchData = async () => {
     try {
@@ -54,17 +63,40 @@ const Profile = () => {
       console.log("ERROR");
     }
   };
+  const followUser = async () => {
+    const updated_account = {
+      ...currentUser,
+      follows: currentUser.follows
+        ? [...currentUser.follows, username]
+        : [username],
+    };
+    const to_follow_updated = {
+      ...user,
+      followers: user.followers
+        ? [...user.followers, currentUser.username]
+        : [currentUser.username],
+    };
 
+    try {
+      await AccountService.updateUser(updated_account);
+      await AccountService.updateUser(to_follow_updated);
+      // add the logged in user to the followers list of the other account
+    } catch (err) {
+      console.log("couldn't update follower user");
+    }
+    // HAVE to add this users to `to_follow`'s list of followers
+  };
   useEffect(() => {
     if (username) {
       try {
         fetchData();
         if (currentUser && currentUser.username === username) {
           initFields(currentUser);
+          console.log("CURR USER", currentUser);
           setMode(true);
         } else if (currentUser && currentUser.username !== username) {
           setMode(false);
-          console.log("FALSE");
+          console.log("HI");
         } else {
           console.log("FALSE");
           setMode(false);
@@ -81,6 +113,7 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
+      {!mode && <button onClick={followUser}>Follow</button>}
       {mode && !editState ? (
         <>
           <button
@@ -158,6 +191,14 @@ const Profile = () => {
           ) : (
             <></>
           )}
+          <div className="lists">
+            Following: {following}
+            <br></br>
+            Followers: {followers}
+            {console.log(following)}
+            <br></br>
+            Likes: {likes}
+          </div>
         </div>
       ) : (
         <>Not signed in</>
