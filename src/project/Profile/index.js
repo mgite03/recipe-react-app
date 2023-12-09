@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
+import { setCurrentUser } from "../users/reducer";
+import { useDispatch } from "react-redux";
 
 const Profile = () => {
   const { username } = useParams();
   const [user, setUser] = useState(null);
   const [editState, setEditState] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const signout = async () => {
     await AccountService.signout();
-    setUser(null);
+    dispatch(setCurrentUser(null));
+    // setUser(null);
     navigate("../login");
   };
   const [account, setAccount] = useState(null);

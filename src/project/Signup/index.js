@@ -1,7 +1,8 @@
-import "./signup.css";
+// import "./signup.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import * as AccountService from "../services/AccountService.js";
+import * as AccountService from "../services/AccountService";
+
 const Signup = () => {
   const handleSignup = () => {
     if (!accountType) {

@@ -3,16 +3,21 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../users/reducer";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   async function handleLogin() {
     const userData = { username, password };
-    let x = await AccountService.loginAccount(userData);
-    if (x) {
+    let user = await AccountService.loginAccount(userData);
+    // TODO: change to try catch with error handling
+    if (user) {
       console.log("ACCOUNT FOUND");
-      navigate(`../profile/${x.username}`);
+      dispatch(setCurrentUser(user));
+      navigate(`../profile/${user.username}`);
     } else {
       console.log("NO ACCOUNT FOUND");
     }
