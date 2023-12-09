@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 import { setCurrentUser } from "../users/reducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
   const { username } = useParams();
@@ -10,6 +10,7 @@ const Profile = () => {
   const [editState, setEditState] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.usersReducer);
   const signout = async () => {
     await AccountService.signout();
     dispatch(setCurrentUser(null));
@@ -23,16 +24,18 @@ const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [accountType, setAccountType] = useState(null);
-
+  function initFields(data) {
+    setUser(data);
+    setUsernameField(data.username);
+    setPassword(data.password);
+    setFirstName(data.firstName);
+    setLastName(data.lastName);
+    setAccountType(data.accountType);
+  }
   const fetchData = async () => {
     try {
       const data = await AccountService.getAccount(username);
-      setUser(data);
-      setUsernameField(data.username);
-      setPassword(data.password);
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setAccountType(data.accountType);
+      initFields(data);
       console.log(data);
     } catch (err) {
       console.log("NOT FOUND IN LOAD");
@@ -49,7 +52,6 @@ const Profile = () => {
       lastName,
       accountType,
     };
-
     setAccount(updatedAccount);
 
     try {
@@ -67,6 +69,9 @@ const Profile = () => {
       try {
         fetchData();
       } catch (e) {}
+    } else if (currentUser) {
+      navigate(`./${currentUser.username}`);
+      initFields(currentUser);
     }
   }, []);
 
