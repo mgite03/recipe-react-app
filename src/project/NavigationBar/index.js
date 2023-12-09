@@ -11,6 +11,9 @@ function NavigationBar() {
               <a href="/" className="nav-link link-dark px-2 active" aria-current="page">Home</a>
             </li>
           </ul>
+          <ul className="nav">
+            <input type="search" className="form-control" placeholder="Search..."/>
+          </ul>
           {!currentUser && (
             <>
               <ul className="nav">
