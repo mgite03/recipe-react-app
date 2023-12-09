@@ -14,11 +14,10 @@ const Profile = () => {
   const signout = async () => {
     await AccountService.signout();
     dispatch(setCurrentUser(null));
-    // setUser(null);
     navigate("../login");
   };
   const [account, setAccount] = useState(null);
-
+  const [mode, setMode] = useState(false); // true if viewing your own profile
   const [usernameField, setUsernameField] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -37,10 +36,7 @@ const Profile = () => {
       const data = await AccountService.getAccount(username);
       initFields(data);
       console.log(data);
-    } catch (err) {
-      console.log("NOT FOUND IN LOAD");
-      console.log(user);
-    }
+    } catch (err) {}
   };
 
   const handleChanges = async () => {
@@ -53,7 +49,6 @@ const Profile = () => {
       accountType,
     };
     setAccount(updatedAccount);
-
     try {
       console.log("ACCOUNT IS ", updatedAccount);
       await AccountService.updateUser(updatedAccount);
@@ -68,38 +63,45 @@ const Profile = () => {
     if (username) {
       try {
         fetchData();
+        if (currentUser && currentUser.username === username) {
+          initFields(currentUser);
+          setMode(true);
+        } else if (currentUser && currentUser.username !== username) {
+          setMode(false);
+          console.log("FALSE");
+        } else {
+          console.log("FALSE");
+          setMode(false);
+        }
       } catch (e) {}
+      // paramsid
     } else if (currentUser) {
+      // viewing own profile after pressing button
       navigate(`./${currentUser.username}`);
       initFields(currentUser);
+      setMode(true);
     }
   }, []);
 
   return (
     <div className="profile-page">
-      {!editState ? (
-        <button
-          className="editProfile"
-          onClick={() => {
-            setEditState(!editState);
-          }}
-        >
-          Edit Profile
-        </button>
+      {mode && !editState ? (
+        <>
+          <button
+            className="editProfile"
+            onClick={() => {
+              setEditState(!editState);
+            }}
+          >
+            Edit Profile
+          </button>
+          <button onClick={signout}>Signout</button>
+        </>
       ) : (
         <></>
       )}
       {user ? (
         <div className="personal-info">
-          Signed in as{" "}
-          {editState ? (
-            <input
-              value={usernameField}
-              onChange={(e) => setUsernameField(e.target.value)}
-            />
-          ) : (
-            <span>{user.username}</span>
-          )}
           {editState ? (
             <>
               <label for="userTypePro">Professional</label>
@@ -146,7 +148,6 @@ const Profile = () => {
           ) : (
             <></>
           )}
-          <button onClick={signout}>Signout</button>
           {editState ? (
             <div className="editButtons">
               <button className="saveChanges" onClick={handleChanges}>
