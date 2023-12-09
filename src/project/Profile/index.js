@@ -11,11 +11,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.usersReducer);
-  const signout = async () => {
-    await AccountService.signout();
-    dispatch(setCurrentUser(null));
-    navigate("../login");
-  };
+
   const [account, setAccount] = useState(null);
   const [mode, setMode] = useState(false); // true if viewing your own profile
   const [usernameField, setUsernameField] = useState("");
@@ -95,7 +91,6 @@ const Profile = () => {
           >
             Edit Profile
           </button>
-          <button onClick={signout}>Signout</button>
         </>
       ) : (
         <></>

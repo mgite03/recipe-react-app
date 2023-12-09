@@ -1,45 +1,85 @@
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import * as AccountService from "../services/AccountService";
+import { setCurrentUser } from "../users/reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 function NavigationBar() {
   const { currentUser } = useSelector((state) => state.usersReducer);
-  return(
+  const dispatch = useDispatch();
+  const signout = async () => {
+    await AccountService.signout();
+    dispatch(setCurrentUser(null));
+    // navigate("../login");
+  };
+  return (
     <>
       <nav className="py-2 bg-light border-bottom">
         <div className="container d-flex flex-wrap">
           <ul className="nav me-auto">
             <li className="nav-item">
-              <a href="/" className="nav-link link-dark px-2 active" aria-current="page">Home</a>
+              <a
+                href="/"
+                className="nav-link link-dark px-2 active"
+                aria-current="page"
+              >
+                Home
+              </a>
             </li>
           </ul>
           <ul className="nav">
-            <input type="search" className="form-control" placeholder="Search..."/>
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search..."
+            />
           </ul>
           {!currentUser && (
             <>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/login" className="nav-link link-dark px-2">Login</a>
+                  <a href="/login" className="nav-link link-dark px-2">
+                    Login
+                  </a>
                 </li>
               </ul>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/register" className="nav-link link-dark px-2">Signup</a>
+                  <a href="/register" className="nav-link link-dark px-2">
+                    Signup
+                  </a>
                 </li>
               </ul>
             </>
           )}
           {currentUser && (
-            <ul className="nav">
-              <li className="nav-item">
-                <a href="/profile" className="nav-link link-dark px-2">Profile</a>
-              </li>
-            </ul>
+            <>
+              <ul className="nav">
+                <li className="nav-item">
+                  <a href="/profile" className="nav-link link-dark px-2">
+                    Profile
+                  </a>
+                </li>
+              </ul>
+              <ul className="nav">
+                <li className="nav-item">
+                  <span className="nav-link link-dark px-2">
+                    Signed in as: <strong>{currentUser.username}</strong>
+                  </span>
+                </li>
+              </ul>
+              <ul className="nav">
+                <li className="nav-item">
+                  <button onClick={signout} className="nav-link link-dark px-2">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </>
           )}
         </div>
       </nav>
       {JSON.stringify(currentUser)}
     </>
-    
 
     // <header className="d-flex justify-content-center py-3">
     //   <ul className="nav nav-pills">
