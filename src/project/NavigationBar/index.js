@@ -9,6 +9,7 @@ function NavigationBar() {
   const signout = async () => {
     await AccountService.signout();
     dispatch(setCurrentUser(null));
+    window.location.reload();
     // navigate("../login");
   };
   return (
@@ -28,10 +29,7 @@ function NavigationBar() {
           </ul>
           <ul className="nav">
             <li className="nav-item">
-              <a
-                href="/search"
-                className="nav-link link-dark px-2"
-              >
+              <a href="/search" className="nav-link link-dark px-2">
                 Search
               </a>
             </li>

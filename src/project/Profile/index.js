@@ -63,7 +63,38 @@ const Profile = () => {
       console.log("ERROR");
     }
   };
+
+  const unfollowUser = async () => {
+    if (!currentUser) {
+      alert("Must be signed in to follow!");
+      return;
+    }
+    const updated_account = {
+      ...currentUser,
+      follows: currentUser.follows.filter((u) => u !== user.username),
+    };
+    const to_follow_updated = {
+      ...user,
+      followers: user.followers.filter((user) => user !== currentUser.username),
+    };
+
+    try {
+      await AccountService.updateUser(to_follow_updated);
+      await AccountService.updateUser(updated_account);
+      setFollowers(followers.filter((f) => f !== currentUser.username));
+      // add the logged in user to the followers list of the other account
+    } catch (err) {
+      console.log("couldn't update follower user");
+    }
+    // HAVE to add this users to `to_follow`'s list of followers
+  };
+
   const followUser = async () => {
+    if (!currentUser) {
+      alert("Must be signed in to follow!");
+      return;
+    }
+    console.log("CURRENT USER", currentUser);
     const updated_account = {
       ...currentUser,
       follows: currentUser.follows
@@ -78,13 +109,13 @@ const Profile = () => {
     };
 
     try {
-      await AccountService.updateUser(updated_account);
       await AccountService.updateUser(to_follow_updated);
+      await AccountService.updateUser(updated_account);
+      setFollowers([...followers, currentUser.username]);
       // add the logged in user to the followers list of the other account
     } catch (err) {
       console.log("couldn't update follower user");
     }
-    // HAVE to add this users to `to_follow`'s list of followers
   };
   useEffect(() => {
     if (username) {
@@ -113,7 +144,13 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      {!mode && <button onClick={followUser}>Follow</button>}
+      {!mode &&
+        (followers.includes(currentUser.username) ? (
+          <button onClick={unfollowUser}>Unfollow</button>
+        ) : (
+          <button onClick={followUser}>Follow</button>
+        ))}
+
       {mode && !editState ? (
         <>
           <button
