@@ -1,9 +1,11 @@
+import { FaUser } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
+import "./profile.css";
 
 const Profile = () => {
   const { username } = useParams();
@@ -63,7 +65,38 @@ const Profile = () => {
       console.log("ERROR");
     }
   };
+
+  const unfollowUser = async () => {
+    if (!currentUser) {
+      alert("Must be signed in to follow!");
+      return;
+    }
+    const updated_account = {
+      ...currentUser,
+      follows: currentUser.follows.filter((u) => u !== user.username),
+    };
+    const to_follow_updated = {
+      ...user,
+      followers: user.followers.filter((user) => user !== currentUser.username),
+    };
+
+    try {
+      await AccountService.updateUser(to_follow_updated);
+      await AccountService.updateUser(updated_account);
+      setFollowers(followers.filter((f) => f !== currentUser.username));
+      // add the logged in user to the followers list of the other account
+    } catch (err) {
+      console.log("couldn't update follower user");
+    }
+    // HAVE to add this users to `to_follow`'s list of followers
+  };
+
   const followUser = async () => {
+    if (!currentUser) {
+      alert("Must be signed in to follow!");
+      return;
+    }
+    console.log("CURRENT USER", currentUser);
     const updated_account = {
       ...currentUser,
       follows: currentUser.follows
@@ -78,13 +111,13 @@ const Profile = () => {
     };
 
     try {
-      await AccountService.updateUser(updated_account);
       await AccountService.updateUser(to_follow_updated);
+      await AccountService.updateUser(updated_account);
+      setFollowers([...followers, currentUser.username]);
       // add the logged in user to the followers list of the other account
     } catch (err) {
       console.log("couldn't update follower user");
     }
-    // HAVE to add this users to `to_follow`'s list of followers
   };
   useEffect(() => {
     if (username) {
@@ -113,7 +146,13 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      {!mode && <button onClick={followUser}>Follow</button>}
+      {!mode &&
+        (currentUser && followers.includes(currentUser.username) ? (
+          <button onClick={unfollowUser}>Unfollow</button>
+        ) : (
+          <button onClick={followUser}>Follow</button>
+        ))}
+
       {mode && !editState ? (
         <>
           <button
@@ -132,50 +171,68 @@ const Profile = () => {
         <div className="personal-info">
           {editState ? (
             <>
-              <label for="userTypePro">Professional</label>
-              <input
-                type="radio"
-                id="userTypePro"
-                name="userType"
-                onChange={() => setAccountType("Professional")}
-                checked={accountType === "Professional"}
-              />
-              <label for="userTypeCas">Casual</label>
-              <input
-                type="radio"
-                id="userTypeCas"
-                name="userType"
-                onChange={() => setAccountType("Casual")}
-                checked={accountType === "Casual"}
-              />
+              <div className="profCasInput">
+                <input
+                  type="radio"
+                  id="userTypePro"
+                  name="userType"
+                  onChange={() => setAccountType("Professional")}
+                  checked={accountType === "Professional"}
+                />
+                <label for="userTypePro">Professional</label>
+                &nbsp;&nbsp;
+                <input
+                  type="radio"
+                  id="userTypeCas"
+                  name="userType"
+                  onChange={() => setAccountType("Casual")}
+                  checked={accountType === "Casual"}
+                />
+                <label for="userTypeCas">Casual</label>
+              </div>
             </>
           ) : (
-            <span>{accountType}</span>
+            <div>
+              <div className="accountType">
+                <span>{accountType}</span>
+              </div>
+              <br />
+              <FaUser className="faUser" />
+            </div>
           )}
-          {editState ? (
-            <input
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          ) : (
-            <span>{user.firstName}</span>
-          )}
-          {editState ? (
-            <input
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          ) : (
-            <span>{user.lastName}</span>
-          )}
-          {editState ? (
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          ) : (
-            <></>
-          )}
+          <div>
+            {editState ? (
+              <input
+                className="editState firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            ) : (
+              <span>{user.firstName}</span>
+            )}
+          </div>
+          <div>
+            {editState ? (
+              <input
+                className="editState lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            ) : (
+              <span>{user.lastName}</span>
+            )}
+          </div>
+          <div>
+            {editState ? (
+              <input
+                className="editState password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            ) : (
+              <></>
+            )}
+          </div>
           {editState ? (
             <div className="editButtons">
               <button className="saveChanges" onClick={handleChanges}>
@@ -191,6 +248,9 @@ const Profile = () => {
           ) : (
             <></>
           )}
+
+          <br />
+
           <div className="lists">
             Following: {following}
             <br></br>

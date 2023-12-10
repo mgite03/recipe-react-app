@@ -1,0 +1,19 @@
+.navBar {
+    background-color: #FAFAED;
+    font-family: 'Lexend', sans-serif;
+    border-bottom: 1.5px solid black;
+}
+
+.nav-item a {
+    color: black;
+}
+
+.nav-item a:hover {
+    color: #FF5762;
+}
+
+.nav-item a.active {
+    color: #FF5762;
+}
+
+

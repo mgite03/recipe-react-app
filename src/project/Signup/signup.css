@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
-.login {
+.signup {
     background-color: #FAFAED;
     display: flex;
     height: 100vh;
@@ -10,7 +10,7 @@
     font-family: 'Lexend', sans-serif;
 }
 
-.login h2 {
+.signup h2 {
     margin-top: 120px;
     display: flex;
     flex-direction: column;
@@ -21,23 +21,13 @@
     color: #FF5762;
 }
 
-.login h1 {
+.signup h1 {
     font-size: 128px;
     margin-bottom: 30px;
 }
 
-
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-
-}
-
-.usernameInput {
+.firstName {
+    margin-top: 20px;
     height: 50px;
     width: 400px;
     background: rgba(144.37, 110.24, 110.24, 0);
@@ -47,7 +37,7 @@
 
 }
 
-.passwordInput {
+.lastName {
     height: 50px;
     width: 400px;
     background: rgba(144.37, 110.24, 110.24, 0);
@@ -55,37 +45,36 @@
     border: 1px black solid;
 }
 
-.backtoLogin {
+.signupButtons .createAccount {
     height: 40px;
     width: 150px;
-    background: #FFCA2F;
+    background: #FF5762;
     border-radius: 45px;
-    border-color: #FFCA2F;
+    border-color: #FF5762;
     margin-bottom: 30px;
+    margin-left: 20px;
 }
 
-.backtoLogin:hover {
+.signupButtons :hover {
     font-weight: bold;
 }
 
-.loginButtons {
+.profCasEntire {
+    margin-top: 20px;
+    align-items: left;
+
+}
+
+.profCas {
+    text-align: left;
+    background-color: #FAFAED;
     display: flex;
+    height: 100vh;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Lexend', sans-serif;
+
 }
 
-.signUpNow {
-    border-style: none;
-    color: #FF5762;
-    background-color: rgba(144.37, 110.24, 110.24, 0);
-}
-
-.signUpNow:hover {
-    border-style: none;
-    font-weight: bold;
-}
-
-.usernameInput, .passwordInput {
+.password {
     padding-left: 20px;
 }

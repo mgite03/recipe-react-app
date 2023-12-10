@@ -1,4 +1,4 @@
-// import "./signup.css";
+import "./signup.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +33,10 @@ const Signup = () => {
   const [accountType, setAccountType] = useState(null);
   return (
     <div className="signup">
+      <div>
+        <h2>WELCOME TO</h2>
+        <h1>GOODEATS</h1>
+      </div>
       <div className="form">
         <input
           className="usernameInput"
@@ -67,20 +71,27 @@ const Signup = () => {
             setLastName(e.target.value);
           }}
         />
-        <label for="userTypePro">Professional</label>
-        <input
-          type="radio"
-          id="userTypePro"
-          name="userType"
-          onChange={() => setAccountType("Professional")}
-        />
-        <label for="userTypeCas">Casual</label>
-        <input
-          type="radio"
-          id="userTypeCas"
-          name="userType"
-          onChange={() => setAccountType("Casual")}
-        />
+        <div className="profCasEntire">
+          <div className="profcas">
+            <input
+              type="radio"
+              id="userTypePro"
+              name="userType"
+              onChange={() => setAccountType("Professional")}
+            />
+            <label for="userTypePro">&nbsp;&nbsp;Professional</label>
+          </div>
+          <div className="profcas">
+            <input
+              type="radio"
+              id="userTypeCas"
+              name="userType"
+              onChange={() => setAccountType("Casual")}
+            />
+            <label for="userTypeCas">&nbsp;&nbsp;Casual</label>
+          </div>
+        </div>
+
       </div>
       <div className="signupButtons">
         <Link to="/login">
