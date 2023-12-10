@@ -11,6 +11,7 @@ function NavigationBar() {
   const signout = async () => {
     await AccountService.signout();
     dispatch(setCurrentUser(null));
+    window.location.reload();
     // navigate("../login");
     setActiveLink("Home");
   };
@@ -43,11 +44,11 @@ function NavigationBar() {
             </li>
           </ul>
           <ul className="nav">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search..."
-            />
+            <li className="nav-item">
+              <a href="/search" className="nav-link link-dark px-2">
+                Search
+              </a>
+            </li>
           </ul>
           {!currentUser && (
             <>
