@@ -13,7 +13,7 @@ function NavigationBar() {
     dispatch(setCurrentUser(null));
     window.location.reload();
     // navigate("../login");
-    setActiveLink("Home");
+    setActiveLink("Search");
   };
   useEffect(() => {
     // Update the active link based on the current URL
@@ -24,6 +24,8 @@ function NavigationBar() {
       setActiveLink("Signup");
     } else if (path === "/home") {
       setActiveLink("Home")
+    } else if (path === "/search") {
+      setActiveLink("Search")
     } else {
       setActiveLink("Profile");
     }
@@ -45,7 +47,9 @@ function NavigationBar() {
           </ul>
           <ul className="nav">
             <li className="nav-item">
-              <a href="/search" className="nav-link link-dark px-2">
+              <a href="/search" 
+              className={`nav-link ${activeLink === "Search" ? "active" : ""}`}
+              >
                 Search
               </a>
             </li>
@@ -79,9 +83,9 @@ function NavigationBar() {
             <>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/profile" 
-                  className={`nav-link ${activeLink === "Profile" ? "active" : ""}`}
-                  
+                  <a href="/profile"
+                    className={`nav-link ${activeLink === "Profile" ? "active" : ""}`}
+
                   >
                     Profile
                   </a>
