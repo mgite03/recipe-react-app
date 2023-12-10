@@ -1,9 +1,11 @@
 // import "./signup.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const handleSignup = () => {
     if (!accountType) {
       console.log("show error popup");
@@ -18,6 +20,7 @@ const Signup = () => {
       try {
         AccountService.createAccount(user);
         console.log("account created");
+        navigate("/profile/user");
       } catch (err) {
         console.log("error creating acct");
       }
