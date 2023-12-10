@@ -27,11 +27,14 @@ function NavigationBar() {
             </li>
           </ul>
           <ul className="nav">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search..."
-            />
+            <li className="nav-item">
+              <a
+                href="/search"
+                className="nav-link link-dark px-2"
+              >
+                Search
+              </a>
+            </li>
           </ul>
           {!currentUser && (
             <>
@@ -78,7 +81,7 @@ function NavigationBar() {
           )}
         </div>
       </nav>
-      {JSON.stringify(currentUser)}
+      {/* {JSON.stringify(currentUser)} */}
     </>
 
     // <header className="d-flex justify-content-center py-3">

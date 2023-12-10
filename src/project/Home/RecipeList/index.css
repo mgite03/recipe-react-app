@@ -1,0 +1,25 @@
+.wd-space-between {
+  justify-content: space-between;
+}
+
+.list-group-item.wd-card {
+  margin: 2.5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0;
+  width: 260px;
+}
+
+.list-group-item {
+  border-width: 0px;
+}
+
+.list-group.wd-card-container {
+  align-content: space-around;
+  border-radius: 0px;
+  border-width: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 5px;
+}
