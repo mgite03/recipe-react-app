@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   async function handleLogin() {
+    
     const userData = { username, password };
     let user = await AccountService.loginAccount(userData);
     // TODO: change to try catch with error handling
@@ -23,7 +24,12 @@ const Login = () => {
     }
   }
   return (
+    
     <div className="login">
+      <div>
+        <h2>WELCOME TO</h2>
+        <h1>GOODEATS</h1>
+      </div>
       <div className="form">
         <input
           className="usernameInput"
@@ -39,13 +45,14 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+
       <div className="loginButtons">
         <button onClick={handleLogin} className="backtoLogin">
           Login
         </button>
-        <Link to="/register">
-          <button className="createAccount">Create Account</button>
-        </Link>
+        <p>Don't have an account? <Link to="/register">
+          <button className="signUpNow">Sign Up Now</button>
+        </Link></p>
       </div>
     </div>
   );

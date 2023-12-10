@@ -2,24 +2,40 @@ import React, { useState, useEffect } from "react";
 import * as AccountService from "../services/AccountService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
+import "./nav.css";
 
 function NavigationBar() {
+  const [activeLink, setActiveLink] = useState("Home"); // Set a default active link
   const { currentUser } = useSelector((state) => state.usersReducer);
   const dispatch = useDispatch();
   const signout = async () => {
     await AccountService.signout();
     dispatch(setCurrentUser(null));
     // navigate("../login");
+    setActiveLink("Home");
   };
+  useEffect(() => {
+    // Update the active link based on the current URL
+    const path = window.location.pathname;
+    if (path === "/login") {
+      setActiveLink("Login");
+    } else if (path === "/register") {
+      setActiveLink("Signup");
+    } else if (path === "/home") {
+      setActiveLink("Home")
+    } else {
+      setActiveLink("Profile");
+    }
+  }, []);
   return (
     <>
-      <nav className="py-2 bg-light border-bottom">
+      <nav className="navBar py-2">
         <div className="container d-flex flex-wrap">
           <ul className="nav me-auto">
             <li className="nav-item">
               <a
                 href="/"
-                className="nav-link link-dark px-2 active"
+                className={`nav-link ${activeLink === "Home" ? "active" : ""}`}
                 aria-current="page"
               >
                 Home
@@ -37,14 +53,21 @@ function NavigationBar() {
             <>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/login" className="nav-link link-dark px-2">
+                  <a
+                    href="/login" className={`nav-link ${activeLink === "Login" ? "active" : ""}`}
+
+                  >
                     Login
                   </a>
                 </li>
               </ul>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/register" className="nav-link link-dark px-2">
+                  <a
+                    href="/register"
+                    className={`nav-link ${activeLink === "Signup" ? "active" : ""}`}
+
+                  >
                     Signup
                   </a>
                 </li>
@@ -55,7 +78,10 @@ function NavigationBar() {
             <>
               <ul className="nav">
                 <li className="nav-item">
-                  <a href="/profile" className="nav-link link-dark px-2">
+                  <a href="/profile" 
+                  className={`nav-link ${activeLink === "Profile" ? "active" : ""}`}
+                  
+                  >
                     Profile
                   </a>
                 </li>
@@ -78,7 +104,7 @@ function NavigationBar() {
           )}
         </div>
       </nav>
-      {JSON.stringify(currentUser)}
+      {/* {JSON.stringify(currentUser)} */}
     </>
 
     // <header className="d-flex justify-content-center py-3">

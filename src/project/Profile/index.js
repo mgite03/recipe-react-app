@@ -1,9 +1,11 @@
+import { FaUser } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
+import "./profile.css";
 
 const Profile = () => {
   const { username } = useParams();
@@ -41,7 +43,7 @@ const Profile = () => {
       const data = await AccountService.getAccount(username);
       initFields(data);
       console.log(data);
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const handleChanges = async () => {
@@ -101,7 +103,7 @@ const Profile = () => {
           console.log("FALSE");
           setMode(false);
         }
-      } catch (e) {}
+      } catch (e) { }
       // paramsid
     } else if (currentUser) {
       // viewing own profile after pressing button
@@ -122,60 +124,83 @@ const Profile = () => {
               setEditState(!editState);
             }}
           >
+
             Edit Profile
           </button>
+
         </>
       ) : (
         <></>
       )}
       {user ? (
+
         <div className="personal-info">
           {editState ? (
             <>
-              <label for="userTypePro">Professional</label>
-              <input
-                type="radio"
-                id="userTypePro"
-                name="userType"
-                onChange={() => setAccountType("Professional")}
-                checked={accountType === "Professional"}
-              />
-              <label for="userTypeCas">Casual</label>
-              <input
-                type="radio"
-                id="userTypeCas"
-                name="userType"
-                onChange={() => setAccountType("Casual")}
-                checked={accountType === "Casual"}
-              />
+              <div className="profCasInput">
+
+                <input
+                  type="radio"
+                  id="userTypePro"
+                  name="userType"
+                  onChange={() => setAccountType("Professional")}
+                  checked={accountType === "Professional"}
+                />
+                <label for="userTypePro">Professional</label>
+                &nbsp;&nbsp;
+
+                <input
+                  type="radio"
+                  id="userTypeCas"
+                  name="userType"
+                  onChange={() => setAccountType("Casual")}
+                  checked={accountType === "Casual"}
+                />
+                <label for="userTypeCas">Casual</label>
+              </div>
             </>
-          ) : (
-            <span>{accountType}</span>
-          )}
+
+          ) :
+            (
+              <div >
+                <div className="accountType">
+                  <span>{accountType}</span>
+                </div>
+                <br />
+                <FaUser className="faUser" />
+              </div>
+            )}
+          <div>
           {editState ? (
-            <input
+            <input className="editState firstName"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           ) : (
             <span>{user.firstName}</span>
+            
           )}
+          </div>
+          <div>
           {editState ? (
-            <input
+            <input className="editState lastName"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
           ) : (
             <span>{user.lastName}</span>
           )}
+          </div>
+          <div>
           {editState ? (
-            <input
+            <input className="editState password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
           ) : (
             <></>
           )}
+          </div>
           {editState ? (
             <div className="editButtons">
               <button className="saveChanges" onClick={handleChanges}>
@@ -191,6 +216,9 @@ const Profile = () => {
           ) : (
             <></>
           )}
+
+          <br />
+
           <div className="lists">
             Following: {following}
             <br></br>
