@@ -11,22 +11,29 @@ const SearchResults = () => {
     const search = async () => {
         try {
             const searchResults = await searchService.fullTextSearch(searchQuery);
-            console.log("THE REULTS ARE");
-            console.log(searchResults);
-            console.log("THE ARRAY IS");
-            console.log(searchResults.results);
-            console.log(typeof (searchResults.results));
-            // console.log(Array.isArray(searchResults.results));
             setResults(searchResults.results);
-            console.log("NOW RESULTS ARE");
-            console.log(results);
-            console.log("of type" + typeof (results));
-        } catch (error) {
+            // console.log(results);
+        } catch (error){
             console.error(error);
         }
     }
 
     useEffect(() => { search(); }, []);
+
+    const renderRecipe = (recipe) => {
+        return (<Link to={`/details/${recipe.id}`} className="col-2">
+        <div className="card">
+                    <img className="card-img-top" src={recipe.thumbnail_url} alt="Card image cap"/>
+                    <div className="card-body">
+                        <h5 className="card-title">{recipe.name}</h5>
+                        <p className="card-text">{truncateDescription(recipe.description)}</p>
+                    </div>
+                </div>
+                </Link>);
+    }
+
+    const truncateDescription = (description) => description.length < 100 ? description : description.substring(0, 96) + "...";
+
 
 
     return (
@@ -34,11 +41,10 @@ const SearchResults = () => {
             <h1> SEARCH RESULTS for {searchQuery}</h1>
             <br />
 
-            <Link to="/search" className="backToSearch">
-                Back to Search
-            </Link>
-            {JSON.stringify(results)}
-
-        </div>)
+        {/* {JSON.stringify(results)} */}
+        <div className="d-flex flex-row flex-wrap"> 
+        {results.map((result) => (renderRecipe(result)))}
+        </div>
+    </div>)
 }
 export default SearchResults;
