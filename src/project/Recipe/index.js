@@ -32,7 +32,9 @@ function Recipe() {
 
   return (
   <div>
-      <h1>{details &&`${details.name}`}</h1>
+      <h1>{details &&`${details.name}`} <button className="float-end" onClick={() => {
+                        AccountService.unlikeRecipe(recipeId, currentUser)
+                        }}>Unlike</button></h1>
       {details && 
       <div>
           <img src={details.thumbnail_url}/>
