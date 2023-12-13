@@ -39,7 +39,7 @@ const Profile = () => {
     setAccountType(data.accountType);
     setFollowers(data.followers);
     setFollowing(data.follows);
-    setLikes(JSON.parse(RecipeService.getLikedRecipeList(data.id)));
+    setLikes(data.likes);
   }
   const fetchData = async () => {
     try {
