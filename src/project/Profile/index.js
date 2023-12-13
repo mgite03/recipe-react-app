@@ -216,21 +216,23 @@ const Profile = () => {
           ) : (
             <div>
               <div className="accountType">
-                <span>{accountType}</span>
+                <span className="accountTypeTitle">
+                  Account Type: {accountType}
+                </span>
+                <br></br>
+                {user.username}
               </div>
               <br />
               <FaUser className="faUser" />
             </div>
           )}
           <div>
-            {editState ? (
+            {editState && (
               <input
                 className="editState firstName"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
-            ) : (
-              <span>{user.firstName}</span>
             )}
           </div>
           <div>
@@ -241,7 +243,9 @@ const Profile = () => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             ) : (
-              <span>{user.lastName}</span>
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
             )}
           </div>
           <div>
