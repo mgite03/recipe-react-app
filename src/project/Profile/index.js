@@ -218,10 +218,12 @@ const Profile = () => {
               <div className="accountType">
                 <span>{accountType}</span>
               </div>
+              <strong>{user.username}</strong>
               <br />
               <FaUser className="faUser" />
             </div>
           )}
+
           <div>
             {editState ? (
               <input
@@ -270,9 +272,7 @@ const Profile = () => {
           ) : (
             <></>
           )}
-
           <br />
-
           <div className="lists">
             <button onClick={openFollowingModal}>
               Following: {following.length}
