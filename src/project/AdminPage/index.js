@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as AccountService from "../services/AccountService";
+import * as AccountService from "../services/AccountService.js";
 import "./Admin.css";
 const AdminPage = () => {
   const dispatch = useDispatch();

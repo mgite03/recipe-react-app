@@ -58,10 +58,28 @@ export const getAccount = async (username) => {
 
 export const likeRecipe = async (recipeId, currentUser) => {
   try {
-    const response = await request.put(`${ACCOUNTS_URL}/like/${recipeId}`, currentUser);
-    console.log(`${ACCOUNTS_URL}/like/${recipeId}`)
+    const response = await request.put(
+      `${ACCOUNTS_URL}/like/${recipeId}`,
+      currentUser
+    );
+    console.log(`${ACCOUNTS_URL}/like/${recipeId}`);
     return response.data;
   } catch (err) {
     console.log("error: " + err);
   }
-}
+};
+
+export const updateUserUsername = async (user, username) => {
+  const response = await request.put(`${ACCOUNTS_URL}/${username}`, user);
+  return response.data;
+};
+
+export const findAllUsers = async () => {
+  const response = await request.get(`${ACCOUNTS_URL}`);
+  return response.data;
+};
+
+export const deleteUser = async (username) => {
+  const response = await request.delete(`${ACCOUNTS_URL}/${username}`);
+  return response.data;
+};

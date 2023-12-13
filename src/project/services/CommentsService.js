@@ -22,7 +22,7 @@ export const createComment = async (comment) => {
 //   return response.data;
 // };
 
-export const getComments = async (recipeId) => {
+export const getRecipeComments = async (recipeId) => {
   try {
     const response = await request.get(`${API_URL}/${recipeId}/comments`);
     return response.data;
