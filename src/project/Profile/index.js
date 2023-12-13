@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
+import * as RecipeService from "../services/RecipeService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
@@ -35,8 +36,7 @@ const Profile = () => {
     setAccountType(data.accountType);
     setFollowers(data.followers);
     setFollowing(data.follows);
-    setLikes(data.likes);
-    console.log("DATA", data);
+    setLikes(JSON.parse(RecipeService.getLikedRecipeList(data.id)));
   }
   const fetchData = async () => {
     try {
@@ -119,6 +119,7 @@ const Profile = () => {
       console.log("couldn't update follower user");
     }
   };
+  
   useEffect(() => {
     if (username) {
       try {
