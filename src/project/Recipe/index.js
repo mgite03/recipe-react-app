@@ -1,9 +1,13 @@
 import { useParams } from "react-router";
 import * as searchService from "../services/SearchService";
 import { useEffect, useState } from "react";
+import * as AccountService from "../services/AccountService";
+import { useSelector } from "react-redux";
+
 function Recipe() {
   const {recipeId} = useParams();
   const [details, setDetails] = useState(null)
+  const { currentUser } = useSelector((state) => state.usersReducer);
 
   const findDetails = async () => {
       try {
@@ -28,7 +32,9 @@ function Recipe() {
 
   return (
   <div>
-      <h1>{details &&`${details.name}`}</h1>
+      <h1>{details &&`${details.name}`} <button className="float-end" onClick={() => {
+                        AccountService.unlikeRecipe(recipeId, currentUser)
+                        }}>Unlike</button></h1>
       {details && 
       <div>
           <img src={details.thumbnail_url}/>

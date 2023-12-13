@@ -69,6 +69,19 @@ export const likeRecipe = async (recipeId, currentUser) => {
   }
 };
 
+export const unlikeRecipe = async (recipeId, currentUser) => {
+  try {
+    const response = await request.put(
+      `${ACCOUNTS_URL}/unlike/${recipeId}`,
+      currentUser
+    );
+    console.log(`${ACCOUNTS_URL}/unlike/${recipeId}`);
+    return response.data;
+  } catch (err) {
+    console.log("error: " + err);
+  }
+};
+
 export const updateUserUsername = async (user, username) => {
   const response = await request.put(`${ACCOUNTS_URL}/${username}`, user);
   return response.data;

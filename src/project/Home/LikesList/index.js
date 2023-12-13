@@ -3,6 +3,7 @@ import * as RecipeService from "../../services/RecipeService";
 import './index.css';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as AccountService from "../../services/AccountService";
 
 function LikesList() {
   const { currentUser } = useSelector((state) => state.usersReducer);
@@ -41,6 +42,9 @@ function LikesList() {
                       <div className="card-body">
                         <h5 className="card-text">{recipe.name}</h5>
                       </div>
+                      <button onClick={() => {
+                        AccountService.unlikeRecipe(recipe.id, currentUser)
+                        }}>Unlike</button>
                     </div>
               </Link>
             ))}
