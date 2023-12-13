@@ -9,15 +9,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensures it's on top of other elements */
+  z-index: 1000;
 }
 
+
 .modal-content {
-  background: white;
+  background: #ffca2f;
   padding: 20px;
-  width: 33%;
   height: 50%;
   overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1001; /* Above the overlay */
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  display: none;
+}
+
+.closeButton {
+  margin-top: 20px;
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 45px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+
+.following {
+  background: #ffca2f;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  width: 350px;
+  border-radius: 10px;
+}
+
+.name {
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+  width: 50%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-width: 1px;
+
 }
