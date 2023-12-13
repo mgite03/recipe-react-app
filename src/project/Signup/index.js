@@ -77,21 +77,20 @@ const Signup = () => {
               type="radio"
               id="userTypePro"
               name="userType"
-              onChange={() => setAccountType("Professional")}
+              onChange={() => setAccountType("Admin")}
             />
-            <label for="userTypePro">&nbsp;&nbsp;Professional</label>
+            <label for="userTypePro">&nbsp;&nbsp;Admin</label>
           </div>
           <div className="profcas">
             <input
               type="radio"
               id="userTypeCas"
               name="userType"
-              onChange={() => setAccountType("Casual")}
+              onChange={() => setAccountType("User")}
             />
-            <label for="userTypeCas">&nbsp;&nbsp;Casual</label>
+            <label for="userTypeCas">&nbsp;&nbsp;User</label>
           </div>
         </div>
-
       </div>
       <div className="signupButtons">
         <Link to="/login">
