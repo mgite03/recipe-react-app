@@ -1,82 +1,82 @@
 .profile-page {
-    background-color: #FAFAED;
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Lexend', sans-serif;
-    text-align: center;
+  background-color: #fafaed;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Lexend", sans-serif;
+  text-align: center;
 }
 
 .accountType {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .faUser {
-    font-size: 200px;
-    margin-bottom: 20px;
+  font-size: 200px;
+  margin-bottom: 20px;
 }
 
 .profCasInput {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .editState {
-    height: 50px;
-    width: 400px;
-    background: rgba(144.37, 110.24, 110.24, 0);
-    border-radius: 68px;
-    border: 1px black solid;
-    margin-bottom: 20px;
+  height: 50px;
+  width: 400px;
+  background: rgba(144.37, 110.24, 110.24, 0);
+  border-radius: 68px;
+  border: 1px black solid;
+  margin-bottom: 20px;
 }
 
 .usernameInput,
 .passwordInput,
 .firstName,
 .lastName {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .editProfile {
-    margin-top: 10px;
-    height: 40px;
-    width: 150px;
-    background: #FFCA2F;
-    border-radius: 45px;
-    border-color: #FFCA2F;
-    margin-bottom: 30px;
-    margin-right: 10px;
+  margin-top: 10px;
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 45px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+  margin-right: 10px;
 }
 
 .passwordInput {
-    height: 50px;
-    width: 400px;
-    background: rgba(144.37, 110.24, 110.24, 0);
-    border-radius: 68px;
-    border: 1px black solid;
+  height: 50px;
+  width: 400px;
+  background: rgba(144.37, 110.24, 110.24, 0);
+  border-radius: 68px;
+  border: 1px black solid;
 }
 
 .saveChanges {
-    height: 40px;
-    width: 150px;
-    background: #FFCA2F;
-    border-radius: 45px;
-    border-color: #FFCA2F;
-    margin-bottom: 30px;
-    margin-right: 10px;
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 45px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+  margin-right: 10px;
 }
 
-.cancelChanges{
-    height: 40px;
-    width: 150px;
-    background: #FF5762;
-    border-radius: 45px;
-    border-color: #FF5762;
-    margin-bottom: 30px;
+.cancelChanges {
+  height: 40px;
+  width: 150px;
+  background: #ff5762;
+  border-radius: 45px;
+  border-color: #ff5762;
+  margin-bottom: 30px;
 }
 
-.saveChanges:hover, .cancelChanges:hover {
-    font-weight: bold;
+.saveChanges:hover,
+.cancelChanges:hover {
+  font-weight: bold;
 }
-

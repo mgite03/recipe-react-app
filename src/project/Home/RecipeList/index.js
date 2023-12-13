@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { FcLike } from "react-icons/fc";
 import './index.css';
 import * as RecipeService from "../../services/RecipeService";
+import * as AccountService from "../../services/AccountService";
+
 
 function RecipeList() {
   const [recipe, setRecipe] = useState(null);
   const [recipes, setRecipes] = useState([]);
-  
+  const { currentUser } = useSelector((state) => state.usersReducer);
+  const navigate = useNavigate();
+
   const fetchRecipes = async () => {
     try {
       const recipesList = await RecipeService.getRecipesList();
@@ -42,6 +48,9 @@ function RecipeList() {
                   <img className="card-img-top" src={recipe.thumbnail_url} alt="Card image"/>
                   <div className="card-body">
                     <h5 className="card-text">{recipe.name}</h5>
+                    <button onClick={() => {
+                      AccountService.likeRecipe(recipe.id, currentUser)
+                    }}>Like</button>
                   </div>
                 </div>
           </Link>

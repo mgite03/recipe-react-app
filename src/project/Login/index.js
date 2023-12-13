@@ -11,20 +11,20 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   async function handleLogin() {
-    
     const userData = { username, password };
     let user = await AccountService.loginAccount(userData);
+    console.log(userData);
     // TODO: change to try catch with error handling
     if (user) {
       console.log("ACCOUNT FOUND");
       dispatch(setCurrentUser(user));
       navigate(`../profile/${user.username}`);
     } else {
+      console.log(user);
       console.log("NO ACCOUNT FOUND");
     }
   }
   return (
-    
     <div className="login">
       <div>
         <h2>WELCOME TO</h2>
@@ -50,9 +50,12 @@ const Login = () => {
         <button onClick={handleLogin} className="backtoLogin">
           Login
         </button>
-        <p>Don't have an account? <Link to="/register">
-          <button className="signUpNow">Sign Up Now</button>
-        </Link></p>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register">
+            <button className="signUpNow">Sign Up Now</button>
+          </Link>
+        </p>
       </div>
     </div>
   );
