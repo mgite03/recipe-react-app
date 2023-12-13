@@ -1,8 +1,14 @@
 import React from "react";
 import "./Popup.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Popup({ onClose, data, following }) {
+  const navigate = useNavigate();
+  const handleClick = (d) => {
+    navigate(`../profile/${d}`);
+    navigate(0);
+  };
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -11,7 +17,7 @@ function Popup({ onClose, data, following }) {
         </div>
         {data.map((d) => (
           <>
-            <Link to={`../profile/${d}`} className="name">
+            <Link onClick={() => handleClick(d)} className="name">
               {d}
             </Link>
           </>
