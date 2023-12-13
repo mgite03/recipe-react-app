@@ -217,7 +217,7 @@ const Profile = () => {
             <div>
               <div className="accountType">
                 <span className="accountTypeTitle">
-                  Account Type: {accountType}
+                  {/* Account Type: {accountType} */}
                 </span>
                 <br></br>
                 {user.username}
