@@ -6,7 +6,7 @@ import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 import "./profile.css";
-
+import Popup from "./Popup";
 const Profile = () => {
   const { username } = useParams();
   const [user, setUser] = useState(null);
@@ -26,6 +26,9 @@ const Profile = () => {
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [likes, setLikes] = useState([]);
+
+  const [followingPopup, setFollowingPopup] = useState(false);
+  const [followerPopup, setFollowerPopup] = useState(false);
   function initFields(data) {
     setUser(data);
     setUsernameField(data.username);
@@ -88,7 +91,12 @@ const Profile = () => {
     } catch (err) {
       console.log("couldn't update follower user");
     }
-    // HAVE to add this users to `to_follow`'s list of followers
+  };
+  const openFollowingModal = () => {
+    setFollowingPopup(true);
+  };
+  const openFollowerModal = () => {
+    setFollowerPopup(true);
   };
 
   const followUser = async () => {
@@ -96,7 +104,6 @@ const Profile = () => {
       alert("Must be signed in to follow!");
       return;
     }
-    console.log("CURRENT USER", currentUser);
     const updated_account = {
       ...currentUser,
       follows: currentUser.follows
@@ -146,6 +153,20 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
+      {followerPopup && (
+        <Popup
+          onClose={() => setFollowerPopup(false)}
+          data={followers}
+          following={false}
+        />
+      )}
+      {followingPopup && (
+        <Popup
+          onClose={() => setFollowingPopup(false)}
+          data={following}
+          following={true}
+        />
+      )}
       {!mode &&
         (currentUser && followers.includes(currentUser.username) ? (
           <button onClick={unfollowUser}>Unfollow</button>
@@ -252,10 +273,13 @@ const Profile = () => {
           <br />
 
           <div className="lists">
-            Following: {following}
+            <button onClick={openFollowingModal}>
+              Following: {following.length}
+            </button>
             <br></br>
-            Followers: {followers}
-            {console.log(following)}
+            <button onClick={openFollowerModal}>
+              Followers: {followers.length}
+            </button>
             <br></br>
             Likes: {likes}
           </div>
