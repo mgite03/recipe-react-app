@@ -6,10 +6,15 @@ function Popup({ onClose, data, following }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>{following ? "Following" : "Followers"}</h2>
-        Data {data}
+        <div className="following">
+          <h2>{following ? "Following" : "Followers"}</h2>
+        </div>
+        {data.map((d) => <div className="name">
+          {d}
+        </div>)}
+
         {/* Modal content goes here */}
-        <button onClick={onClose}>Close</button>
+        <button className="closeButton" onClick={onClose}>Close</button>
       </div>
     </div>
   );

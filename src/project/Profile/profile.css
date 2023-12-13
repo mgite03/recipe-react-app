@@ -57,6 +57,24 @@
   border: 1px black solid;
 }
 
+.followingButton{
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 45px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+}
+
+.followButton {
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 45px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+}
+
 .saveChanges {
   height: 40px;
   width: 150px;
