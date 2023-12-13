@@ -9,10 +9,11 @@ import Profile from "./Profile";
 import Search from "./Search";
 import SearchResults from "./Search/SearchResults";
 import Recipe from "./Recipe";
+import Admin from "./AdminPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function Project() {
-  return(
+  return (
     <Provider store={store}>
       <CurrentUser>
         <NavigationBar />
@@ -28,6 +29,7 @@ function Project() {
               <Route path="/search" element={<Search />} />
               <Route path="/search/:searchQuery" element={<SearchResults />} />
               <Route path="/details/:recipeId" element={<Recipe />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </div>
         </BrowserRouter>

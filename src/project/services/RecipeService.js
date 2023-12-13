@@ -1,6 +1,11 @@
 import axios from "axios";
 
 const KEY = process.env.REACT_APP_API_KEY;
+const API_BASE = process.env.REACT_APP_API_BASE
+const RECIPE_URL = `${API_BASE}/recipes`;
+const request = axios.create({
+  withCredentials: true,
+});
 
 const popularList = () => {
   return{
@@ -68,6 +73,14 @@ export const getRecipeAt = async (recipeId) => {
     console.log("GETTING RECIPE:");
     console.log(response.data);
     return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const getLikedRecipeList = async (userId) => {
+  try {
+    const response = await request.get(`${RECIPE_URL}/user/${userId}`)
   } catch (error) {
     console.error(error);
   }
