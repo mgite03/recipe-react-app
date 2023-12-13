@@ -17,14 +17,19 @@ export const createComment = async (comment) => {
   }
 };
 
-// export const updateUser = async (user) => {
-//   const response = await request.put(`${ACCOUNTS_URL}/${user.username}`, user);
-//   return response.data;
-// };
-
 export const getRecipeComments = async (recipeId) => {
   try {
-    const response = await request.get(`${API_URL}/${recipeId}/comments`);
+    const response = await request.get(`${API_URL}/comments/${recipeId}`);
+    return response.data;
+  } catch (err) {
+    console.log("couldn't find comments");
+  }
+};
+
+
+export const getComments = async () => {
+  try {
+    const response = await request.get(`${API_URL}/comments`);
     return response.data;
   } catch (err) {
     console.log("couldn't find comments");
