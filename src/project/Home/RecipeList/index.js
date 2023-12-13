@@ -31,7 +31,7 @@ function RecipeList() {
   }, []);
 
   return(
-    <div>
+    <div className="popularRecipes">
       <h3>Popular Recipes This Week</h3>
       <div className="list-group wd-card-container">
       {recipes.map((recipe) => (
