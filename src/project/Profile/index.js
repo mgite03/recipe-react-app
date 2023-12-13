@@ -126,7 +126,7 @@ const Profile = () => {
       console.log("couldn't update follower user");
     }
   };
-  
+
   useEffect(() => {
     if (username) {
       try {
@@ -198,19 +198,19 @@ const Profile = () => {
                   type="radio"
                   id="userTypePro"
                   name="userType"
-                  onChange={() => setAccountType("Professional")}
-                  checked={accountType === "Professional"}
+                  onChange={() => setAccountType("Admin")}
+                  checked={accountType === "Admin"}
                 />
-                <label for="userTypePro">Professional</label>
+                <label for="userTypePro">Admin</label>
                 &nbsp;&nbsp;
                 <input
                   type="radio"
                   id="userTypeCas"
                   name="userType"
-                  onChange={() => setAccountType("Casual")}
-                  checked={accountType === "Casual"}
+                  onChange={() => setAccountType("User")}
+                  checked={accountType === "User"}
                 />
-                <label for="userTypeCas">Casual</label>
+                <label for="userTypeCas">User</label>
               </div>
             </>
           ) : (

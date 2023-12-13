@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
-import './index.css';
+import "./index.css";
 import * as RecipeService from "../../services/RecipeService";
 import * as AccountService from "../../services/AccountService";
-
 
 function RecipeList() {
   const [recipe, setRecipe] = useState(null);
@@ -20,11 +19,11 @@ function RecipeList() {
       console.log(recipesList);
       console.log("array:");
       console.log(recipesList.results);
-      console.log(typeof(recipesList.results));
+      console.log(typeof recipesList.results);
       setRecipes(recipesList.results);
       console.log("NOW results are");
       console.log(recipes);
-      console.log("of type" + typeof(recipes));
+      console.log("of type" + typeof recipes);
     } catch (err) {
       console.log("can't load recipes");
       console.error(err);
@@ -35,25 +34,42 @@ function RecipeList() {
   useEffect(() => {
     fetchRecipes();
   }, []);
-
-  return(
+  const handleCardClick = (recipeId) => {
+    if (currentUser) {
+      // Replace 'yourCondition' with your actual condition
+      navigate(`/details/${recipeId}`);
+    } else {
+      alert("Must be logged in");
+    }
+  };
+  return (
     <div className="popularRecipes">
       <h3>Popular Recipes This Week</h3>
       <div className="list-group wd-card-container">
-      {recipes.map((recipe) => (
-          <Link key={recipe.id}
-                to={`/details/${recipe.id}`}
-                className="list-group-item wd-card">
-                <div className="card">
-                  <img className="card-img-top" src={recipe.thumbnail_url} alt="Card image"/>
-                  <div className="card-body">
-                    <h5 className="card-text">{recipe.name}</h5>
-                    <button onClick={() => {
-                      AccountService.likeRecipe(recipe.id, currentUser)
-                    }}>Like</button>
-                  </div>
-                </div>
-          </Link>
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="list-group-item wd-card">
+            <div className="card" onClick={() => handleCardClick(recipe.id)}>
+              <img
+                className="card-img-top"
+                src={recipe.thumbnail_url}
+                alt="Card image"
+              />
+              <div className="card-body">
+                <h5 className="card-text">{recipe.name}</h5>
+                <button
+                  onClick={(e) => {
+                    if (currentUser) {
+                      AccountService.likeRecipe(recipe.id, currentUser);
+                    } else {
+                      alert("Must be loggeed in");
+                    }
+                  }}
+                >
+                  Like
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
