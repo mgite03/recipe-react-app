@@ -28,6 +28,8 @@ function NavigationBar() {
       setActiveLink("Search")
     } else if (path === "/users") {
       setActiveLink("UserPage")
+    } else if (path === "/user") {
+      setActiveLink("User")
     } else {
       setActiveLink("Profile");
     }

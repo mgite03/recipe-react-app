@@ -96,3 +96,30 @@ export const deleteUser = async (username) => {
   const response = await request.delete(`${ACCOUNTS_URL}/${username}`);
   return response.data;
 };
+
+
+export const followUser = async (username, currentUser) => {
+  try {
+    const response = await request.put(
+      `${ACCOUNTS_URL}/follow/${username}`,
+      currentUser
+    );
+    console.log(`${ACCOUNTS_URL}/follow/${username}`);
+    return response.data;
+  } catch (err) {
+    console.log("error: " + err);
+  }
+};
+
+export const unFollowUser = async (username, currentUser) => {
+  try {
+    const response = await request.put(
+      `${ACCOUNTS_URL}/unfollow/${username}`,
+      currentUser
+    );
+    console.log(`${ACCOUNTS_URL}/unfollow/${username}`);
+    return response.data;
+  } catch (err) {
+    console.log("error: " + err);
+  }
+};
