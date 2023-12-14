@@ -73,14 +73,16 @@ const UserPage = () => {
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
-                <button className="btn btn-primary" onClick={() => {
-                  AccountService.followUser(user.username, currentUser)
-                  window.location.reload(false)
-                }}>Follow</button>
-                <button className="btn btn-primary" onClick={() => {
-                  AccountService.unFollowUser(user.username, currentUser)
-                  window.location.reload(false)
-                }}>Unfollow</button>
+                {currentUser &&
+                  <><button className="btn btn-primary" onClick={() => {
+                    AccountService.followUser(user.username, currentUser)
+                    window.location.reload(false)
+                  }}>Follow</button>
+                    <button className="btn btn-primary" onClick={() => {
+                      AccountService.unFollowUser(user.username, currentUser)
+                      window.location.reload(false)
+                    }}>Unfollow</button></>}
+                  {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
               </td>
             </tr>
           ))}
