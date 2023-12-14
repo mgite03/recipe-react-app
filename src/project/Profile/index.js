@@ -161,7 +161,7 @@ const Profile = () => {
         <Popup
           onClose={() => setFollowerPopup(false)}
           data={followers}
-          title={"Follower"}
+          title={"Followers"}
         />
       )}
       {followingPopup && (
@@ -287,15 +287,13 @@ const Profile = () => {
 
           <br />
 
-          <div className="lists">
+          <div className="button-group">
             <button onClick={openFollowingModal}>
               Following: {following.length}
             </button>
-            <br></br>
             <button onClick={openFollowerModal}>
               Followers: {followers.length}
             </button>
-            <br></br>
             <button onClick={openLikesModal}>Likes: {likes.length}</button>
           </div>
         </div>

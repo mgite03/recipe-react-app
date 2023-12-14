@@ -102,3 +102,15 @@
 .accountTypeTitle {
   font-size: 12px;
 }
+
+.button-group {
+  display: flex;
+  gap: 2px;
+}
+
+.button-group button {
+  border: 0px;
+  border-radius: 5px;
+  height: 40px;
+  width: 125px;
+}
