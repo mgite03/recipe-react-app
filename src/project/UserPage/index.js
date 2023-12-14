@@ -83,14 +83,14 @@ const UserPage = () => {
               <td>{user.followers.map((user) => user + " ")}</td>
               <td>
                 {currentUser && user._id !== currentUser._id && !(currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
-                  <><button className="btn btn-primary followButton" onClick={() => {
-                    AccountService.followUser(user.username, currentUser)
+                  <><button className="btn btn-primary followButton" onClick={async () => {
+                    await AccountService.followUser(user.username, currentUser)
                     window.location.reload(false)
                   }}>Follow</button></>
                 )}
                 {currentUser && user._id !== currentUser._id && (currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
-                  <><button className="btn btn-primary followButton" onClick={() => {
-                    AccountService.unFollowUser(user.username, currentUser)
+                  <><button className="btn btn-primary followButton" onClick={async () => {
+                    await AccountService.unFollowUser(user.username, currentUser)
                     window.location.reload(false)
                   }}>Unfollow</button></>
                 )}
@@ -159,14 +159,14 @@ const UserPage = () => {
                 <div className="buttons">
                   {/* <div className="row"> */}
                   {currentUser && user._id !== currentUser._id && !(currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
-                    <><button className="btn btn-primary followButton" onClick={() => {
-                      AccountService.followUser(user.username, currentUser)
+                    <><button className="btn btn-primary followButton" onClick={async () => {
+                      await AccountService.followUser(user.username, currentUser)
                       window.location.reload(false)
                     }}>Follow</button></>
                   )}
                   {currentUser && user._id !== currentUser._id && (currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
-                    <><button className="btn btn-primary followButton" onClick={() => {
-                      AccountService.unFollowUser(user.username, currentUser)
+                    <><button className="btn btn-primary followButton" onClick={async () => {
+                      await AccountService.unFollowUser(user.username, currentUser)
                       window.location.reload(false)
                     }}>Unfollow</button></>
                   )}

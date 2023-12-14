@@ -42,9 +42,9 @@ function LikesList() {
                 />
                   <h5 className="card-text">{recipe.name}</h5>
                   <button className="likeButton"
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       if (currentUser) {
-                        AccountService.unlikeRecipe(recipe.id);
+                        await AccountService.unlikeRecipe(recipe.id);
                         window.location.reload(false);
                       } else {
                         alert("Must be logged in");

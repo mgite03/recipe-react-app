@@ -41,16 +41,16 @@ function Recipe() {
             <h1 className="title">{details && `${details.name}`}
             {currentUser && isCurrentlyLiked && (
               <div className="">
-                  <button className="btn btn-danger" onClick={() => {
-                      AccountService.unlikeRecipe(recipeId)
+                  <button className="btn btn-danger" onClick={async () => {
+                      await AccountService.unlikeRecipe(recipeId)
                       window.location.reload(false)
                   }}><BiDislike /></button>
               </div>
             )}
             {currentUser && !isCurrentlyLiked && (
               <div className="">
-                  <button className="btn btn-primary" onClick={() => {
-                      AccountService.likeRecipe(recipeId)
+                  <button className="btn btn-primary" onClick={async () => {
+                      await AccountService.likeRecipe(recipeId)
                       window.location.reload(false)
                   }}>
                       <BiLike />

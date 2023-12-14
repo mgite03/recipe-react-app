@@ -26,7 +26,7 @@ function CommentSection() {
         fetchComments();
     }, []);
 
-    const currateComment = () => {
+    const currateComment = async () => {
         const comment = {
             username: currentUser.username,
             createTime: new Date().toLocaleDateString,
@@ -34,15 +34,15 @@ function CommentSection() {
             recipeId: recipeId,
             likes: 0,
         };
-        CommentsService.createComment(comment);
+        await CommentsService.createComment(comment);
         window.location.reload(false);
     };
 
     const deleteButton = (comment) => {
         if (currentUser.username == comment.username || currentUser.accountType == "Admin") {
             return (
-                <button className="btn btn-danger float-end me-5" onClick={() => {
-                    CommentsService.deleteComment(comment.id)
+                <button className="btn btn-danger float-end me-5" onClick={async () => {
+                    await CommentsService.deleteComment(comment.id)
                     window.location.reload(false)
                 }}>Delete</button>
             )
