@@ -38,8 +38,8 @@ function Recipe() {
     return (
         <div>
             {/* <h1 className="title">{details && `${details.name}`}</h1> */}
-            {JSON.stringify(currentUser)}
-            {JSON.stringify(isCurrentlyLiked)}
+            {/* {JSON.stringify(currentUser)} */}
+            {/* {JSON.stringify(isCurrentlyLiked)} */}
 
             {currentUser && isCurrentlyLiked && (
               <div className="ms-3 me-3">

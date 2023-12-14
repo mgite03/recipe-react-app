@@ -61,6 +61,7 @@
 
 .followButton {
 margin-left: 10px;
+margin-bottom: 0px;
 width: 100px;
 }
 
@@ -87,3 +88,8 @@ table a:hover {
   text-align: center;
   padding-top: 20px;
 }
+/* .white-box {
+  height: 40px;
+  width: 100px;
+  background-color: #FAFAED;
+} */

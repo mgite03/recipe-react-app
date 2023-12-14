@@ -79,8 +79,8 @@ const UserPage = () => {
                   {user.username}
                 </Link>
               </td>
-              <td>{user.follows}</td>
-              <td>{user.followers}</td>
+              <td>{user.follows.map((user) => user + " ")}</td>
+              <td>{user.followers.map((user) => user + " ")}</td>
               <td>
                 {currentUser && user._id !== currentUser._id && !(currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
                   <><button className="btn btn-primary followButton" onClick={() => {
@@ -107,7 +107,7 @@ const UserPage = () => {
   ) : (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-      <table className="table w-50 m-auto ">
+      <table className="table w-75 m-auto">
         <thead>
           <tr>
             <th>Username</th>
@@ -115,11 +115,12 @@ const UserPage = () => {
             <th>Follows</th>
             <th>Followers</th>
             <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td className="background-color">
               <input
                 value={user.username}
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
@@ -138,6 +139,7 @@ const UserPage = () => {
             </td>
             <td></td>
             <td></td>
+            <td></td>
             <td className="buttons">
               <button className="updateButton" onClick={handleUpdate}>
                 Update User
@@ -146,33 +148,51 @@ const UserPage = () => {
           </tr>
           {users.map((user) => (
             <tr key={user._id}>
-              <Link to={`/profile/${user.username}`}>
+              <td><Link to={`/profile/${user.username}`}>
                 {user.username}
-              </Link>
+              </Link></td>
               <td>{user.accountType}</td>
-              <td style={{width: "10px"}}>{user.follows}</td>
-              <td>{user.followers}</td>
-              <td className="buttons">
-                <button className="btn btn-primary followButton" onClick={() => {
-                  AccountService.followUser(user.username, currentUser)
-                  window.location.reload(false)
-                }}>Follow</button>
-                <button className="btn btn-primary followButton" onClick={() => {
-                  AccountService.unFollowUser(user.username, currentUser)
-                  window.location.reload(false)
-                }}>Unfollow</button>
-                <button
-                  className="selectButton"
-                  onClick={() => selectUser(user)}
-                >
-                  Select
-                </button>
-                <button
-                  className="deleteButton"
-                  onClick={() => handleDelete(user)}
-                >
-                  Delete User
-                </button>
+              <td style={{width: "10px"}}>{user.follows.map((user) => user + " ")}</td>
+              <td>{user.followers.map((user) => user + " ")}</td>
+              <td>
+                <div className="buttons">
+                  {/* <div className="row"> */}
+                  {currentUser && user._id !== currentUser._id && !(currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
+                    <><button className="btn btn-primary followButton" onClick={() => {
+                      AccountService.followUser(user.username, currentUser)
+                      window.location.reload(false)
+                    }}>Follow</button></>
+                  )}
+                  {currentUser && user._id !== currentUser._id && (currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
+                    <><button className="btn btn-primary followButton" onClick={() => {
+                      AccountService.unFollowUser(user.username, currentUser)
+                      window.location.reload(false)
+                    }}>Unfollow</button></>
+                  )}
+                  {currentUser && user._id === currentUser._id && (
+                    // <div><label>You can't follow yourself!</label></div>
+                    // <div className="white-box"></div>
+                    <></>
+                  )}
+                  
+                  {/* </div> */}
+                </div>
+              </td>
+              <td>
+                <div className="buttons">
+                      <button
+                        className="selectButton"
+                        onClick={() => selectUser(user)}
+                      >
+                        Select
+                      </button>
+                      <button
+                        className="deleteButton"
+                        onClick={() => handleDelete(user)}
+                      >
+                        Delete User
+                      </button>
+                    </div>
               </td>
             </tr>
           ))}
