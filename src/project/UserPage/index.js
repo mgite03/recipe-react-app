@@ -82,11 +82,11 @@ const UserPage = () => {
               <td>{user.followers}</td>
               <td>
                 {currentUser &&
-                  <><button className="btn btn-primary" onClick={() => {
+                  <><button className="btn btn-primary followButton" onClick={() => {
                     AccountService.followUser(user.username, currentUser)
                     window.location.reload(false)
                   }}>Follow</button>
-                    <button className="btn btn-primary" onClick={() => {
+                    <button className="btn btn-primary followButton" onClick={() => {
                       AccountService.unFollowUser(user.username, currentUser)
                       window.location.reload(false)
                     }}>Unfollow</button></>}

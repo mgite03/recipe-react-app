@@ -46,7 +46,6 @@
   background: #ffca2f;
   border-radius: 45px;
   border-color: #ffca2f;
-  margin-bottom: 30px;
 }
 
 .passwordInput {
@@ -66,6 +65,15 @@
   margin-bottom: 30px;
 }
 
+.toFollowButton {
+  height: 40px;
+  width: 150px;
+  background: #ffca2f;
+  border-radius: 10px;
+  border-color: #ffca2f;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
 .followButton {
   height: 40px;
   width: 150px;
