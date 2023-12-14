@@ -30,6 +30,7 @@ const Profile = () => {
 
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followerPopup, setFollowerPopup] = useState(false);
+  const [likesModal, setLikesModal] = useState(false);
   function initFields(data) {
     setUser(data);
     setUsernameField(data.username);
@@ -98,7 +99,9 @@ const Profile = () => {
   const openFollowerModal = () => {
     setFollowerPopup(true);
   };
-
+  const openLikesModal = () => {
+    setLikesModal(true);
+  };
   const followUser = async () => {
     if (!currentUser) {
       alert("Must be signed in to follow!");
@@ -158,14 +161,21 @@ const Profile = () => {
         <Popup
           onClose={() => setFollowerPopup(false)}
           data={followers}
-          following={false}
+          title={"Followers"}
         />
       )}
       {followingPopup && (
         <Popup
           onClose={() => setFollowingPopup(false)}
           data={following}
-          following={true}
+          title={"Following"}
+        />
+      )}
+      {likesModal && (
+        <Popup
+          onClose={() => setLikesModal(false)}
+          data={likes}
+          title={"Likes"}
         />
       )}
       {!mode &&
@@ -216,21 +226,23 @@ const Profile = () => {
           ) : (
             <div>
               <div className="accountType">
-                <span>{accountType}</span>
+                <span className="accountTypeTitle">
+                  {/* Account Type: {accountType} */}
+                </span>
+                <br></br>
+                {user.username}
               </div>
               <br />
               <FaUser className="faUser" />
             </div>
           )}
           <div>
-            {editState ? (
+            {editState && (
               <input
                 className="editState firstName"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
-            ) : (
-              <span>{user.firstName}</span>
             )}
           </div>
           <div>
@@ -241,7 +253,9 @@ const Profile = () => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             ) : (
-              <span>{user.lastName}</span>
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
             )}
           </div>
           <div>
@@ -273,16 +287,14 @@ const Profile = () => {
 
           <br />
 
-          <div className="lists">
+          <div className="button-group">
             <button onClick={openFollowingModal}>
               Following: {following.length}
             </button>
-            <br></br>
             <button onClick={openFollowerModal}>
               Followers: {followers.length}
             </button>
-            <br></br>
-            Likes: {likes}
+            <button onClick={openLikesModal}>Likes: {likes.length}</button>
           </div>
         </div>
       ) : (
