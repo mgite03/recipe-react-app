@@ -111,13 +111,16 @@
 }
 
 .button-group {
-  display: flex;
-  gap: 2px;
+  display: block;
+  /* text-align: center; */
+  margin: 10px;
+
 }
 
 .button-group button {
   border: 0px;
   border-radius: 5px;
+  margin: 2px;
   height: 40px;
   width: 125px;
 }
