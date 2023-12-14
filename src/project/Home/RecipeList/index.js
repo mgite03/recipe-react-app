@@ -38,21 +38,21 @@ function RecipeList() {
   useEffect(() => {
     fetchRecipes();
   }, []);
-  const handleCardClick = (recipeId) => {
-    if (currentUser) {
-      // Replace 'yourCondition' with your actual condition
-      navigate(`/details/${recipeId}`);
-    } else {
-      alert("Must be logged in");
-    }
-  };
+  // const handleCardClick = (recipeId) => {
+  //   if (currentUser) {
+  //     // Replace 'yourCondition' with your actual condition
+  //     navigate(`/details/${recipeId}`);
+  //   } else {
+  //     alert("Must be logged in");
+  //   }
+  // };
   return (
     <div className="popularRecipes">
-      <h3>Popular Recipes This Week</h3>
+      <h3 className="mt-5">Popular Recipes This Week</h3>
       <div className="list-group wd-card-container">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="list-group-item wd-card">
-            <div className="card" onClick={() => handleCardClick(recipe.id)}>
+            <div className="card" onClick={() => {<Link to={`../details/${recipe.id}`}/>}}>
               <img
                 className="card-img-top"
                 src={recipe.thumbnail_url}
@@ -61,10 +61,10 @@ function RecipeList() {
                 <h5 className="card-text">{recipe.name}</h5>
                 <button className="likeButton"
                   onClick={(e) => {
-                    if (currentUser && (currentUserLikes ? currentUserLikes.includes(recipe.id) : false)) {
+                    if (currentUser && currentUserLikes.includes(recipe.id.toString())) {
                       AccountService.unlikeRecipe(recipe.id);
                       window.location.reload(false);
-                    } else if (currentUser) {
+                    } else if (currentUser && (currentUserLikes ? !currentUserLikes.includes(recipe.id.toString()) : false)) {
                       AccountService.likeRecipe(recipe.id);
                       window.location.reload(false);
                     } else {

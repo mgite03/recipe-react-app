@@ -41,3 +41,17 @@
 .likeButton{
     background: aqua;
 }
+
+.commentSection {
+  background-color: #FAFAED;
+  color: #FF5762;
+}
+
+a:link {
+  text-decoration: none;
+  color: #FF5762;
+}
+
+a:visited {
+  color: #FF5762;
+}

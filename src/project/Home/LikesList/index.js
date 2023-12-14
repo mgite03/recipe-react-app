@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import * as RecipeService from "../../services/RecipeService";
+// import './index.js';
 import '../RecipeList/index.js';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,10 +28,35 @@ function LikesList() {
     fetchRecipes(likes);
   }, []);
   return(
-    <div>
-      {currentUser && (
+    <div className="popularRecipes">
+      <h3 className="mt-5">Your liked recipes</h3>
+      <div className="list-group wd-card-container">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="list-group-item wd-card">
+            <div className="card" onClick={() => {<Link to={`../details/${recipe.id}`}/>}}>
+              <img
+                className="card-img-top"
+                src={recipe.thumbnail_url}
+                alt="Card image"
+              />
+                <h5 className="card-text">{recipe.name}</h5>
+                <button className="likeButton"
+                  onClick={(e) => {
+                    if (currentUser) {
+                      AccountService.unlikeRecipe(recipe.id);
+                      window.location.reload(false);
+                    } else {
+                      alert("Must be logged in");
+                    }
+                  }}>Unlike
+                </button>
+              </div>
+            </div>
+        ))}
+      </div>
+      {/* {currentUser && (
         <div>
-          <h3>Your liked recipes</h3>
+          <h3 className="mt-5">Your liked recipes</h3>
           <div className="list-group wd-card-container">
           {recipes.map((recipe) => (
               <Link key={recipe.id}
@@ -50,6 +76,9 @@ function LikesList() {
             ))}
           </div>
         </div>
+      )} */}
+      {currentUser && likes.length === 0 && (
+        <div>It's empty here... Start liking recipes!</div>
       )}
     </div>
   );

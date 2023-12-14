@@ -33,7 +33,6 @@ const SearchResults = () => {
           />
           <div className="card-body">
             <h5 className="card-title">{recipe.name}</h5>
-            
           </div>
         </div>
       </Link>
