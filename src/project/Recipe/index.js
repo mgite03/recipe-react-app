@@ -35,7 +35,7 @@ function Recipe() {
     }
 
   return (
-  <div>
+  <div className="recipeComments">
       <h1>{details &&`${details.name}`}
       {currentUser && (
             <div>

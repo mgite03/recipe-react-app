@@ -35,7 +35,7 @@ function CommentSection() {
     CommentsService.createComment(comment);
   };
   return (
-    <div>
+    <div className="comments">
       <div className="list-group">
         {comments.map((comment) => (
           <div className="list-group-item">
@@ -47,12 +47,12 @@ function CommentSection() {
         ))}
       </div>
       <div className="d-flex flex-column">
-        <input
+        <input class="commentDescription form-control form-control-lg w-75"
           type="text"
           placeholder="Comment Description"
           onChange={(e) => setDecription(e.target.value)}
         />
-        <button onClick={currateComment}>Submit</button>
+        <button className="submitButton" onClick={currateComment}>Submit</button>
       </div>
     </div>
   );
