@@ -30,6 +30,7 @@ const Profile = () => {
 
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followerPopup, setFollowerPopup] = useState(false);
+  const [likesModal, setLikesModal] = useState(false);
   function initFields(data) {
     setUser(data);
     setUsernameField(data.username);
@@ -98,7 +99,9 @@ const Profile = () => {
   const openFollowerModal = () => {
     setFollowerPopup(true);
   };
-
+  const openLikesModal = () => {
+    setLikesModal(true);
+  };
   const followUser = async () => {
     if (!currentUser) {
       alert("Must be signed in to follow!");
@@ -158,14 +161,21 @@ const Profile = () => {
         <Popup
           onClose={() => setFollowerPopup(false)}
           data={followers}
-          following={false}
+          title={"Followers"}
         />
       )}
       {followingPopup && (
         <Popup
           onClose={() => setFollowingPopup(false)}
           data={following}
-          following={true}
+          title={"Following"}
+        />
+      )}
+      {likesModal && (
+        <Popup
+          onClose={() => setLikesModal(false)}
+          data={likes}
+          title={"Likes"}
         />
       )}
       {!mode &&
@@ -277,16 +287,14 @@ const Profile = () => {
 
           <br />
 
-          <div className="lists">
+          <div className="button-group">
             <button className="followingButton" onClick={openFollowingModal}>
               Following: {following.length}
             </button>
-            <br></br>
             <button className="followingButton" onClick={openFollowerModal}>
               Followers: {followers.length}
             </button>
-            <br></br>
-            Likes: {likes}
+            <button onClick={openLikesModal}>Likes: {likes.length}</button>
           </div>
         </div>
       ) : (
