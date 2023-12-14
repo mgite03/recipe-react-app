@@ -49,8 +49,8 @@ function NavigationBar() {
           </ul>
           <ul className="nav">
             <li className="nav-item">
-              <a href="/search" 
-              className={`nav-link ${activeLink === "Search" ? "active" : ""}`}
+              <a href="/search"
+                className={`nav-link ${activeLink === "Search" ? "active" : ""}`}
               >
                 Search
               </a>

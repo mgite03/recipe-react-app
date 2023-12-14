@@ -53,9 +53,9 @@ const UserPage = () => {
   };
 
   return !currentUser || currentUser.accountType !== "Admin" ? (
-    <div className="Check out other users!">
+    <div className="CheckOutOtherUsers">
       <h1 className="user-title">User List</h1>
-      <table className="table">
+      <table className="table w-75 m-auto">
         <thead>
           <tr>
             <th>Username</th>
@@ -92,7 +92,7 @@ const UserPage = () => {
   ) : (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-      <table className="table">
+      <table className="table w-75 p-2 m-auto ">
         <thead>
           <tr>
             <th>Username</th>
@@ -124,7 +124,7 @@ const UserPage = () => {
             <td></td>
             <td></td>
             <td className="buttons">
-              <button className="btn btn-primary" onClick={handleUpdate}>
+              <button className="updateButton" onClick={handleUpdate}>
                 Update User
               </button>
             </td>
@@ -145,13 +145,13 @@ const UserPage = () => {
                   window.location.reload(false)
                 }}>Unfollow</button>
                 <button
-                  className="btn btn-secondary"
+                  className="selectButton"
                   onClick={() => selectUser(user)}
                 >
                   Select
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="deleteButton"
                   onClick={() => handleDelete(user)}
                 >
                   Delete User
