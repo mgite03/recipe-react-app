@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as AccountService from "../services/AccountService.js";
-import "./Admin.css";
-const AdminPage = () => {
+import "./UserPage.css";
+const UserPage = () => {
   const { currentUser } = useSelector((state) => state.usersReducer);
   const [users, setUsers] = useState([]);
   const [originalUser, setOriginalUser] = useState();
@@ -59,8 +59,9 @@ const AdminPage = () => {
         <thead>
           <tr>
             <th>Username</th>
-            <th>Account Type</th>
-            <th></th>
+            <th>Follows</th>
+            <th>Followers</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -71,6 +72,10 @@ const AdminPage = () => {
               <td>{user.username}</td>
               <td>{user.follows}</td>
               <td>{user.followers}</td>
+              <td>
+                <button className="btn">Follow</button>
+                <button className="btn">Unfollow</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -118,6 +123,8 @@ const AdminPage = () => {
               <td>{user.username}</td>
               <td>{user.accountType}</td>
               <td className="buttons">
+                <button className="btn">Follow</button>
+                <button className="btn">Unfollow</button>
                 <button
                   className="btn btn-secondary"
                   onClick={() => selectUser(user)}
@@ -139,4 +146,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default UserPage;
