@@ -26,6 +26,8 @@ function NavigationBar() {
       setActiveLink("Home")
     } else if (path === "/search") {
       setActiveLink("Search")
+    } else if (path === "/user") {
+      setActiveLink("User")
     } else {
       setActiveLink("Profile");
     }

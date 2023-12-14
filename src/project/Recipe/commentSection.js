@@ -35,6 +35,16 @@ function CommentSection() {
     };
     CommentsService.createComment(comment);
   };
+
+  const deleteButton = (comment) => {
+    if (currentUser.username == comment.username || currentUser.accountType == "Admin") {
+        return(
+            <button className="btn btn-danger float-end" onClick={() => CommentsService.deleteComment(comment.id)}>Delete</button>
+        )
+    }
+    return(<></>);
+  }
+
   return (
     <div>
       <div className="list-group">
@@ -43,6 +53,7 @@ function CommentSection() {
             <div className="d-flex flex-row">
               <h3>{comment.username}</h3>
               <h4>{comment.description}</h4>
+              {deleteButton(comment)}
             </div>
           </div>
         ))}
