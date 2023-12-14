@@ -54,6 +54,15 @@ function NavigationBar() {
               </a>
             </li>
           </ul>
+          <ul className="nav">
+            <li className="nav-item">
+              <a href="/users" 
+              className={`nav-link ${activeLink === "user" ? "active" : ""}`}
+              >
+                User Page
+              </a>
+            </li>
+          </ul>
           {!currentUser && (
             <>
               <ul className="nav">
@@ -85,7 +94,6 @@ function NavigationBar() {
                 <li className="nav-item">
                   <a href="/profile"
                     className={`nav-link ${activeLink === "Profile" ? "active" : ""}`}
-
                   >
                     Profile
                   </a>

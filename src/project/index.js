@@ -9,7 +9,7 @@ import Profile from "./Profile";
 import Search from "./Search";
 import SearchResults from "./Search/SearchResults";
 import Recipe from "./Recipe";
-import Admin from "./AdminPage";
+import UserPage from "./UserPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function Project() {
@@ -29,7 +29,8 @@ function Project() {
               <Route path="/search" element={<Search />} />
               <Route path="/search/:searchQuery" element={<SearchResults />} />
               <Route path="/details/:recipeId" element={<Recipe />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin" element={<UserPage />} />
+              <Route path="/users" element={<UserPage />} />
             </Routes>
           </div>
         </BrowserRouter>
