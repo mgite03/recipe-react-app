@@ -38,14 +38,14 @@ function CommentSection() {
     return (
         <div>
             <div className="list-grop">
-                {comments.map((comment) => {
+                {/* {comments.map((comment) => {
                     <div className="list-group-item">
                         <div className='d-flex flex-row'>
                             <h3>{comment.username}</h3>
                             <h4>{comment.description}</h4>
                         </div>
                     </div>
-                })}
+                })} */}
             </div>
             <div className='d-flex flex-column'>
                 <input type='text' placeholder='Comment Description' onChange={(e) => setDecription(e.target.value)} />

@@ -59,12 +59,9 @@
 }
 
 .d-flex {
-    align-content: space-around;
     justify-content: center;
     background-color: #FAFAED;
     padding-bottom: 50px;
-
-
 }
 
 .card {
@@ -79,10 +76,12 @@
 
 .card-title {
     vertical-align: text-top;
-    align-items: top;
-    margin-bottom: auto;
-}
+    align-items: flex-start;
+    line-height: 22px;
+    text-overflow: clip;
+    
 
+}
 
 .card-body {
     align-content: space-around;
@@ -92,5 +91,7 @@
     row-gap: 5px;
     display: flex;
     justify-content: center;
-    height: 150px;
+    height: 80px;
+    text-overflow: ellipsis;
+
 }
