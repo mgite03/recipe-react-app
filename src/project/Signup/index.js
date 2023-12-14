@@ -20,7 +20,7 @@ const Signup = () => {
       try {
         AccountService.createAccount(user);
         console.log("account created");
-        navigate("/profile/user");
+        navigate(`/profile/${user.username}`);
       } catch (err) {
         console.log("error creating acct");
       }
