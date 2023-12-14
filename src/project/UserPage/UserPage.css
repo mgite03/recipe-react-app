@@ -88,8 +88,8 @@ table a:hover {
   text-align: center;
   padding-top: 20px;
 }
-/* .white-box {
+.white-box {
   height: 40px;
   width: 100px;
-  background-color: #FAFAED;
-} */
+  background-color: white;
+}

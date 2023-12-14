@@ -95,7 +95,8 @@ const UserPage = () => {
                   }}>Unfollow</button></>
                 )}
                 {currentUser && user._id === currentUser._id && (
-                  <div><label>You can't follow yourself!</label></div>
+                  // <div><label>You can't follow yourself!</label></div>
+                  <div className="white-box"></div>
                 )}
                 {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
               </td>
@@ -170,9 +171,7 @@ const UserPage = () => {
                     }}>Unfollow</button></>
                   )}
                   {currentUser && user._id === currentUser._id && (
-                    // <div><label>You can't follow yourself!</label></div>
-                    // <div className="white-box"></div>
-                    <></>
+                    <div className="white-box"></div>
                   )}
                   
                   {/* </div> */}
