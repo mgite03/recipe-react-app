@@ -11,20 +11,23 @@ function RecipeList() {
   const [recipe, setRecipe] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const { currentUser } = useSelector((state) => state.usersReducer);
+  const currentUserLikes = currentUser.likes;
   const navigate = useNavigate();
+
+  // const isCurrentlyLiked = currentUser.likes ? currentUser.likes.includes(recipeId) : false;
 
   const fetchRecipes = async () => {
     try {
       const recipesList = await RecipeService.getRecipesList();
-      console.log("results:");
-      console.log(recipesList);
-      console.log("array:");
-      console.log(recipesList.results);
-      console.log(typeof recipesList.results);
+      // console.log("results:");
+      // console.log(recipesList);
+      // console.log("array:");
+      // console.log(recipesList.results);
+      // console.log(typeof recipesList.results);
       setRecipes(recipesList.results);
-      console.log("NOW results are");
-      console.log(recipes);
-      console.log("of type" + typeof recipes);
+      // console.log("NOW results are");
+      // console.log(recipes);
+      // console.log("of type" + typeof recipes);
     } catch (err) {
       console.log("can't load recipes");
       console.error(err);
@@ -58,10 +61,14 @@ function RecipeList() {
                 <h5 className="card-text">{recipe.name}</h5>
                 <button className="likeButton"
                   onClick={(e) => {
-                    if (currentUser) {
-                      AccountService.likeRecipe(recipe.id, currentUser);
+                    if (currentUser && (currentUserLikes ? currentUserLikes.includes(recipe.id) : false)) {
+                      AccountService.unlikeRecipe(recipe.id);
+                      window.location.reload(false);
+                    } else if (currentUser) {
+                      AccountService.likeRecipe(recipe.id);
+                      window.location.reload(false);
                     } else {
-                      alert("Must be loggeed in");
+                      alert("Must be logged in");
                     }
                   }}><FaHeart/>
                 </button>

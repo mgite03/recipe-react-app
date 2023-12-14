@@ -42,7 +42,8 @@ function LikesList() {
                         <h5 className="card-text">{recipe.name}</h5>
                       </div>
                       <button onClick={() => {
-                        AccountService.unlikeRecipe(recipe.id, currentUser)
+                        AccountService.unlikeRecipe(recipe.id, currentUser);
+                        window.location.reload(false);
                         }}>Unlike</button>
                     </div>
               </Link>

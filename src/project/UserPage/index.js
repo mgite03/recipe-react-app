@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const UserPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.usersReducer);
+  const currentUserFollows = currentUser.follows;
   const [users, setUsers] = useState([]);
   const [originalUser, setOriginalUser] = useState();
   const [user, setUser] = useState({
@@ -81,15 +82,17 @@ const UserPage = () => {
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
-                {currentUser && user._id !== currentUser._id && (
+                {currentUser && user._id !== currentUser._id && !(currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
                   <><button className="btn btn-primary followButton" onClick={() => {
                     AccountService.followUser(user.username, currentUser)
                     window.location.reload(false)
-                  }}>Follow</button>
-                    <button className="btn btn-primary followButton" onClick={() => {
-                      AccountService.unFollowUser(user.username, currentUser)
-                      window.location.reload(false)
-                    }}>Unfollow</button></>
+                  }}>Follow</button></>
+                )}
+                {currentUser && user._id !== currentUser._id && (currentUserFollows ? currentUserFollows.includes(user.username) : false) && (
+                  <><button className="btn btn-primary followButton" onClick={() => {
+                    AccountService.unFollowUser(user.username, currentUser)
+                    window.location.reload(false)
+                  }}>Unfollow</button></>
                 )}
                 {currentUser && user._id === currentUser._id && (
                   <div><label>You can't follow yourself!</label></div>
