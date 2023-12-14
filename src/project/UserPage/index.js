@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as AccountService from "../services/AccountService.js";
 import "./UserPage.css";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+
 const UserPage = () => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.usersReducer);
   const [users, setUsers] = useState([]);
   const [originalUser, setOriginalUser] = useState();
@@ -69,7 +73,11 @@ const UserPage = () => {
           </tr>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.username}</td>
+              <td>
+                <Link to={`/profile/${user.username}`}>
+                  {user.username}
+                </Link>
+              </td>
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
@@ -82,7 +90,7 @@ const UserPage = () => {
                       AccountService.unFollowUser(user.username, currentUser)
                       window.location.reload(false)
                     }}>Unfollow</button></>}
-                  {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
+                {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
               </td>
             </tr>
           ))}
@@ -131,7 +139,9 @@ const UserPage = () => {
           </tr>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.username}</td>
+              <Link to={`/profile/${user.username}`}>
+                {user.username}
+              </Link>
               <td>{user.accountType}</td>
               <td style={{width: "10px"}}>{user.follows}</td>
               <td>{user.followers}</td>
