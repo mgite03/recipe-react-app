@@ -39,6 +39,7 @@ const Profile = () => {
     setAccountType(data.accountType);
     setFollowers(data.followers);
     setFollowing(data.follows);
+    console.log("Likes is :" + data.likes)
     setLikes(data.likes);
   }
   const fetchData = async () => {

@@ -9,6 +9,9 @@ function Recipe() {
   const [details, setDetails] = useState(null)
   const { currentUser } = useSelector((state) => state.usersReducer);
 
+  // const [currentlyLiked] = currentUser.likes;
+  // .contains(parseInt(recipeId));
+
   const findDetails = async () => {
       try {
           const details = await searchService.detailSearch(recipeId);
@@ -32,16 +35,27 @@ function Recipe() {
 
   return (
   <div>
-      <h1>{details &&`${details.name}`} <button className="float-end" onClick={() => {
-                        AccountService.unlikeRecipe(recipeId, currentUser)
-                        }}>Unlike</button></h1>
+      <h1>{details &&`${details.name}`}
+      {currentUser && (
+            <div>
+              <button className="float-end" onClick={() => {
+                AccountService.unlikeRecipe(recipeId, currentUser)
+                }}>Unlike</button>
+            </div>
+          )}
+      {currentUser && (
+            <div>
+              <button className="float-end" onClick={() => {AccountService.likeRecipe(details.id, currentUser)}}>
+                Like
+              </button>
+
+            </div>
+          )} 
+      </h1>
       {details && 
       <div>
           <img src={details.thumbnail_url}/>
 
-          <button onClick={() => {AccountService.likeRecipe(details.id, currentUser)}}>
-            Like
-          </button>
 
           <h3>{details.description}</h3>
           Ingredients: <ul>
