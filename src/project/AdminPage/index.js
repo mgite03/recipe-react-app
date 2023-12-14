@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as AccountService from "../services/AccountService.js";
 import "./Admin.css";
 const AdminPage = () => {
-  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.usersReducer);
   const [users, setUsers] = useState([]);
   const [originalUser, setOriginalUser] = useState();
@@ -11,7 +10,6 @@ const AdminPage = () => {
     username: "",
     accountType: "Admin",
   });
-  const [editableUser, setEditableUser] = useState(null);
   const fetchUsers = async () => {
     const users = await AccountService.findAllUsers();
     setUsers(users);
@@ -55,7 +53,29 @@ const AdminPage = () => {
   };
 
   return !currentUser || currentUser.accountType !== "Admin" ? (
-    <h1>This page can only be viewed by admins</h1>
+    <div className="Check out other users!">
+      <h1 className="user-title">User List</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Account Type</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          </tr>
+          {users.map((user) => (
+            <tr key={user._id}>
+              <td>{user.username}</td>
+              <td>{user.follows}</td>
+              <td>{user.followers}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   ) : (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
