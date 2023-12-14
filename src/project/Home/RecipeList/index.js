@@ -52,7 +52,7 @@ function RecipeList() {
       <div className="list-group wd-card-container">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="list-group-item wd-card">
-            <div className="card" onClick={() => {<Link to={`../details/${recipe.id}`}/>}}>
+            <Link className="card" to={`/details/${recipe.id}`}>
               <img
                 className="card-img-top"
                 src={recipe.thumbnail_url}
@@ -72,7 +72,7 @@ function RecipeList() {
                     }
                   }}><FaHeart/>
                 </button>
-              </div>
+              </Link>
             </div>
         ))}
       </div>
