@@ -28,8 +28,10 @@ function NavigationBar() {
       setActiveLink("Search")
     } else if (path === "/users") {
       setActiveLink("Users")
-    } else {
+    } else if (path.indexOf("/profile") > -1) {
       setActiveLink("Profile");
+    } else {
+      setActiveLink(null);
     }
   }, []);
   return (

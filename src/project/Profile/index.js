@@ -1,12 +1,14 @@
 import { FaUser } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate, Link } from "react-router-dom";
 import * as AccountService from "../services/AccountService";
 import * as RecipeService from "../services/RecipeService";
+import * as CommentsService from "../services/CommentsService";
 import { setCurrentUser } from "../users/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 import "./profile.css";
+import "./Popup.css";
 import Popup from "./Popup";
 import ProtectedContent from "../users/protectedContent";
 const Profile = () => {
@@ -32,6 +34,8 @@ const Profile = () => {
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followerPopup, setFollowerPopup] = useState(false);
   const [likesModal, setLikesModal] = useState(false);
+
+  const [commentsList, setCommentsList] = useState([]);
   function initFields(data) {
     setUser(data);
     setUsernameField(data.username);
@@ -47,10 +51,19 @@ const Profile = () => {
   const fetchData = async () => {
     try {
       const data = await AccountService.getAccount(username);
+      const comments = await CommentsService.getCommentsByUser(username);
       initFields(data);
+      setCommentsList(comments);
       console.log(data);
     } catch (err) {}
   };
+
+  // const getRecipeAtId = async (repId) => {
+  //   try {
+  //     let recipeName = await RecipeService.getRecipeAt(repId);
+  //     return recipeName.name;
+  //   } catch (err) {}
+  // }
 
   const handleChanges = async () => {
     console.log("RUN");
@@ -299,6 +312,28 @@ const Profile = () => {
             </button>
             <button onClick={openLikesModal}>Likes: {likes.length}</button>
           </div>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+            {commentsList.map((comment, idx) => (
+              <tr key={comment.id}>
+                <td>
+                  <Link to={`../details/${comment.recipeId}`}>
+                    {username}: {comment.description}
+                    {/* {console.log(getRecipeAt(comment.recipeId).name)}
+                    {getRecipeAt(comment.recipeId).name} */}
+                  </Link>
+                </td>
+                {/* <td>{comment.description}</td> */}
+              </tr>
+            ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <>Not signed in</>

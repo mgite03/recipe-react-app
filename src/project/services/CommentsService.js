@@ -45,3 +45,12 @@ export const deleteComment = async (commentId) => {
       console.log("couldn't delete comment")
     }
 }
+
+export const getCommentsByUser = async (username) => {
+  try {
+    const response = await request.get(`${COMMENTS_URL}/user/${username}`);
+    return response.data;
+  } catch (err) {
+    console.log("couldn't get comments by username");
+  }
+}
