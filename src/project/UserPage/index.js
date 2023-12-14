@@ -92,7 +92,7 @@ const UserPage = () => {
   ) : (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-      <table className="table w-75 p-2 m-auto ">
+      <table className="table w-50 m-auto ">
         <thead>
           <tr>
             <th>Username</th>
@@ -133,14 +133,14 @@ const UserPage = () => {
             <tr key={user._id}>
               <td>{user.username}</td>
               <td>{user.accountType}</td>
-              <td>{user.follows}</td>
+              <td style={{width: "10px"}}>{user.follows}</td>
               <td>{user.followers}</td>
               <td className="buttons">
-                <button className="btn btn-primary" onClick={() => {
+                <button className="btn btn-primary followButton" onClick={() => {
                   AccountService.followUser(user.username, currentUser)
                   window.location.reload(false)
                 }}>Follow</button>
-                <button className="btn btn-primary" onClick={() => {
+                <button className="btn btn-primary followButton" onClick={() => {
                   AccountService.unFollowUser(user.username, currentUser)
                   window.location.reload(false)
                 }}>Unfollow</button>
