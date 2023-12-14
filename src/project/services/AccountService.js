@@ -56,11 +56,10 @@ export const getAccount = async (username) => {
   }
 };
 
-export const likeRecipe = async (recipeId, currentUser) => {
+export const likeRecipe = async (recipeId) => {
   try {
     const response = await request.put(
-      `${ACCOUNTS_URL}/like/${recipeId}`,
-      currentUser
+      `${ACCOUNTS_URL}/like/${recipeId}`
     );
     console.log(`${ACCOUNTS_URL}/like/${recipeId}`);
     return response.data;
@@ -69,11 +68,10 @@ export const likeRecipe = async (recipeId, currentUser) => {
   }
 };
 
-export const unlikeRecipe = async (recipeId, currentUser) => {
+export const unlikeRecipe = async (recipeId) => {
   try {
     const response = await request.put(
-      `${ACCOUNTS_URL}/unlike/${recipeId}`,
-      currentUser
+      `${ACCOUNTS_URL}/unlike/${recipeId}`
     );
     console.log(`${ACCOUNTS_URL}/unlike/${recipeId}`);
     return response.data;

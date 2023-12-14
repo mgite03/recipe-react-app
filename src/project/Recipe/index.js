@@ -12,8 +12,7 @@ function Recipe() {
     const [details, setDetails] = useState(null)
     const { currentUser } = useSelector((state) => state.usersReducer);
 
-    // const [currentlyLiked] = currentUser.likes;
-    // .contains(parseInt(recipeId));
+    const isCurrentlyLiked = currentUser.likes ? currentUser.likes.includes(recipeId) : false;
 
     const findDetails = async () => {
         try {
@@ -38,50 +37,28 @@ function Recipe() {
 
     return (
         <div>
-            <h1 className="title">{details && `${details.name}`}</h1>
+            {/* <h1 className="title">{details && `${details.name}`}</h1> */}
+            {JSON.stringify(currentUser)}
+            {JSON.stringify(isCurrentlyLiked)}
 
-
-            {details &&
-                <div>
-                    <div className="d-flex justify-content-center">
-                        <img src={details.thumbnail_url} className="img-fluid rounded col-2" />
-                    </div>
-                    <div className="d-flex justify-content-center">
-                        {currentUser && (
-                            <div className="ms-3 me-3">
-                                <button className="btn btn-danger" onClick={() => {
-                                    AccountService.unlikeRecipe(recipeId, currentUser)
-                                    window.location.reload(false)
-                                }}><BiDislike /></button>
-                            </div>
-                        )}
-                        {currentUser && (
-                            <div className="ms-3 me-3">
-                                <button className="btn btn-primary" onClick={() => {
-                                    AccountService.likeRecipe(details.id, currentUser)
-                                    window.location.reload(false)
-                                }}>
-                                    <BiLike />
-                                </button>
-
-                            </div>
-                        )}
-                    </div>
-
-                    <h3 className="description">{details.description}</h3>
-                    <div className="recipe-text ps-5">
-                        Ingredients: <ul>
-                            {listOfIngredients().filter((ingredient) => (ingredient !== "n/a")).map((ingredient) => <li>{ingredient}</li>)}
-                        </ul>
-                        <ol>
-                            {details.instructions.map((step) =>
-                                <li>
-                                    {step.display_text}
-                                </li>)}
-                        </ol>
-                        {/* {JSON.stringify(details)} */}
-                    </div>
-                </div>}
+            {currentUser && isCurrentlyLiked && (
+              <div className="ms-3 me-3">
+                  <button className="btn btn-danger" onClick={() => {
+                      AccountService.unlikeRecipe(recipeId)
+                      window.location.reload(false)
+                  }}><BiDislike /></button>
+              </div>
+            )}
+            {currentUser && !isCurrentlyLiked && (
+              <div className="ms-3 me-3">
+                  <button className="btn btn-primary" onClick={() => {
+                      AccountService.likeRecipe(recipeId)
+                      window.location.reload(false)
+                  }}>
+                      <BiLike />
+                  </button>
+              </div>
+            )}
             <CommentSection />
         </div>);
 }
