@@ -2,6 +2,7 @@ import * as CommentsService from "../services/CommentsService.js";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import "./recipe.css"
 
 function CommentSection() {
   const { recipeId } = useParams();
@@ -46,13 +47,14 @@ function CommentSection() {
           </div>
         ))}
       </div>
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column ps-5">
         <input
+        className="form-select w-75"
           type="text"
           placeholder="Comment Description"
           onChange={(e) => setDecription(e.target.value)}
         />
-        <button onClick={currateComment}>Submit</button>
+        <button className="searchButton" onClick={currateComment}>Submit</button>
       </div>
     </div>
   );

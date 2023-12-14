@@ -1,0 +1,43 @@
+.title {
+    background-color: #FAFAED;
+    justify-content: center;
+    font-family: 'Lexend', sans-serif;
+    text-align: center;
+    padding-top: 40px;
+    color: #FF5762;
+    margin-bottom: 0px;
+    padding-bottom: 40px;
+}
+
+.description {
+    background-color: #FAFAED;
+    justify-content: center;
+    font-family: 'Lexend', sans-serif;
+    text-align: center;
+    padding-top: 40px;
+    color: black;
+    margin-bottom: 0px;
+    padding-bottom: 40px;
+}
+
+.recipe-text {
+    background-color: #FAFAED;
+    font-family: 'Lexend', sans-serif;
+    height: 100vh;
+    flex-direction: row;
+}
+
+.searchButton {
+    width: 150px;
+    background: #FFCA2F;
+    border-radius: 45px;
+    color: black;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.likeButton{
+    background: aqua;
+}
