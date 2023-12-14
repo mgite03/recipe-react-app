@@ -2,6 +2,7 @@ import * as CommentsService from "../services/CommentsService.js";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./recipe.css"
 
 function CommentSection() {
@@ -55,7 +56,9 @@ function CommentSection() {
                 {comments.map((comment) => (
                     <div className="list-group-item">
                         <div className="d-flex flex-row">
-                            <h3>{comment.username}</h3>
+                            <h3><Link to={`/profile/${comment.username}`}>
+                                {comment.username}
+                            </Link></h3>
                             <h4>{comment.description}</h4>
                             {deleteButton(comment)}
                         </div>

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as AccountService from "../services/AccountService.js";
 import "./UserPage.css";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+
 const UserPage = () => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.usersReducer);
   const [users, setUsers] = useState([]);
   const [originalUser, setOriginalUser] = useState();
@@ -53,9 +57,9 @@ const UserPage = () => {
   };
 
   return !currentUser || currentUser.accountType !== "Admin" ? (
-    <div className="Check out other users!">
+    <div className="CheckOutOtherUsers">
       <h1 className="user-title">User List</h1>
-      <table className="table">
+      <table className="table w-75 m-auto">
         <thead>
           <tr>
             <th>Username</th>
@@ -69,20 +73,24 @@ const UserPage = () => {
           </tr>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.username}</td>
+              <td>
+                <Link to={`/profile/${user.username}`}>
+                  {user.username}
+                </Link>
+              </td>
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
                 {currentUser &&
-                  <><button className="btn btn-primary" onClick={() => {
+                  <><button className="btn btn-primary followButton" onClick={() => {
                     AccountService.followUser(user.username, currentUser)
                     window.location.reload(false)
                   }}>Follow</button>
-                    <button className="btn btn-primary" onClick={() => {
+                    <button className="btn btn-primary followButton" onClick={() => {
                       AccountService.unFollowUser(user.username, currentUser)
                       window.location.reload(false)
                     }}>Unfollow</button></>}
-                  {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
+                {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
               </td>
             </tr>
           ))}
@@ -92,7 +100,7 @@ const UserPage = () => {
   ) : (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-      <table className="table">
+      <table className="table w-50 m-auto ">
         <thead>
           <tr>
             <th>Username</th>
@@ -124,34 +132,36 @@ const UserPage = () => {
             <td></td>
             <td></td>
             <td className="buttons">
-              <button className="btn btn-primary" onClick={handleUpdate}>
+              <button className="updateButton" onClick={handleUpdate}>
                 Update User
               </button>
             </td>
           </tr>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.username}</td>
+              <Link to={`/profile/${user.username}`}>
+                {user.username}
+              </Link>
               <td>{user.accountType}</td>
-              <td>{user.follows}</td>
+              <td style={{width: "10px"}}>{user.follows}</td>
               <td>{user.followers}</td>
               <td className="buttons">
-                <button className="btn btn-primary" onClick={() => {
+                <button className="btn btn-primary followButton" onClick={() => {
                   AccountService.followUser(user.username, currentUser)
                   window.location.reload(false)
                 }}>Follow</button>
-                <button className="btn btn-primary" onClick={() => {
+                <button className="btn btn-primary followButton" onClick={() => {
                   AccountService.unFollowUser(user.username, currentUser)
                   window.location.reload(false)
                 }}>Unfollow</button>
                 <button
-                  className="btn btn-secondary"
+                  className="selectButton"
                   onClick={() => selectUser(user)}
                 >
                   Select
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="deleteButton"
                   onClick={() => handleDelete(user)}
                 >
                   Delete User

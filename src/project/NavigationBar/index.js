@@ -26,8 +26,8 @@ function NavigationBar() {
       setActiveLink("Home")
     } else if (path === "/search") {
       setActiveLink("Search")
-    } else if (path === "/user") {
-      setActiveLink("User")
+    } else if (path === "/users") {
+      setActiveLink("Users")
     } else {
       setActiveLink("Profile");
     }
@@ -49,8 +49,8 @@ function NavigationBar() {
           </ul>
           <ul className="nav">
             <li className="nav-item">
-              <a href="/search" 
-              className={`nav-link ${activeLink === "Search" ? "active" : ""}`}
+              <a href="/search"
+                className={`nav-link ${activeLink === "Search" ? "active" : ""}`}
               >
                 Search
               </a>
@@ -59,9 +59,9 @@ function NavigationBar() {
           <ul className="nav">
             <li className="nav-item">
               <a href="/users" 
-              className={`nav-link ${activeLink === "user" ? "active" : ""}`}
+              className={`nav-link ${activeLink === "Users" ? "active" : ""}`}
               >
-                User Page
+                Users
               </a>
             </li>
           </ul>

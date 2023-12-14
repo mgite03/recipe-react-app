@@ -181,9 +181,9 @@ const Profile = () => {
       )}
       {!mode &&
         (currentUser && followers.includes(currentUser.username) ? (
-          <button onClick={unfollowUser}>Unfollow</button>
+          <button className="toFollowButton" onClick={unfollowUser}>Unfollow</button>
         ) : (
-          <button onClick={followUser}>Follow</button>
+          <button className="toFollowButton" onClick={followUser}>Follow</button>
         ))}
 
       {mode && !editState ? (
