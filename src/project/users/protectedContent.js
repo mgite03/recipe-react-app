@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedContent({ children }) {
   const { currentUser } = useSelector((state) => state.usersReducer);
-  if (currentUser && currentUser.role === "Professional") {
+  if (currentUser) {
     return children;
   }
   return null;

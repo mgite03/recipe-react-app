@@ -36,9 +36,7 @@ function Project() {
               <Route path="/details/:recipeId" element={<Recipe />} />
               {/* <Route path="/admin" element={<UserPage />} /> */}
               <Route path="/users" 
-                element={
-                    <UserPage />
-                } 
+                element={<UserPage />} 
               />
             </Routes>
           </div>

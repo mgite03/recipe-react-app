@@ -80,7 +80,7 @@ const UserPage = () => {
               </td>
               <td>{user.follows}</td>
               <td>{user.followers}</td>
-              <td className="same-height">
+              <td>
                 {currentUser && user._id !== currentUser._id && (
                   <><button className="btn btn-primary followButton" onClick={() => {
                     AccountService.followUser(user.username, currentUser)
