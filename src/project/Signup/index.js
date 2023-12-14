@@ -6,7 +6,7 @@ import * as AccountService from "../services/AccountService";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (!accountType) {
       console.log("show error popup");
     } else {
@@ -18,7 +18,7 @@ const Signup = () => {
         accountType: accountType,
       };
       try {
-        AccountService.createAccount(user);
+        await AccountService.createAccount(user);
         console.log("account created");
         navigate(`/profile/${username}`);
         window.location.reload(false);
