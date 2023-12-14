@@ -61,7 +61,7 @@ function NavigationBar() {
               <a href="/users" 
               className={`nav-link ${activeLink === "Users" ? "active" : ""}`}
               >
-                User Page
+                Users
               </a>
             </li>
           </ul>
