@@ -82,7 +82,7 @@ function CommentSection() {
                 <textarea
                     className="form-control w-75"
                     type="text"
-                    placeholder="Comment Description"
+                    placeholder="Write a comment..."
                     onChange={(e) => setDecription(e.target.value)}
                 />
                 <button className="searchButton" onClick={currateComment}>Submit</button>
