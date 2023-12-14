@@ -60,7 +60,9 @@ function RecipeList() {
                 src={recipe.thumbnail_url}
                 alt="Card image"
               />
-                <h5 className="card-text">{recipe.name}</h5>
+              <div className="card-body">
+                <h5 className="card-title">{recipe.name}</h5>
+              </div>
               </Link>
               <button className="likeButton"
                   onClick={async (e) => {

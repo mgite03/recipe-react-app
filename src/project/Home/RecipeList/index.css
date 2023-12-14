@@ -13,6 +13,10 @@
   width: 100%;
 }
 
+.card .card-text {
+  border-width: 0px;
+}
+
 .popularRecipes h3 {
   margin-bottom: 40px;
 
