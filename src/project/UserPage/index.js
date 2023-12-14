@@ -80,8 +80,8 @@ const UserPage = () => {
               </td>
               <td>{user.follows}</td>
               <td>{user.followers}</td>
-              <td>
-                {currentUser &&
+              <td className="same-height">
+                {currentUser && user._id !== currentUser._id && (
                   <><button className="btn btn-primary followButton" onClick={() => {
                     AccountService.followUser(user.username, currentUser)
                     window.location.reload(false)
@@ -89,7 +89,11 @@ const UserPage = () => {
                     <button className="btn btn-primary followButton" onClick={() => {
                       AccountService.unFollowUser(user.username, currentUser)
                       window.location.reload(false)
-                    }}>Unfollow</button></>}
+                    }}>Unfollow</button></>
+                )}
+                {currentUser && user._id === currentUser._id && (
+                  <div><label>You can't follow yourself!</label></div>
+                )}
                 {!currentUser && <label>Sign in to Follow or Unfollow!</label>}
               </td>
             </tr>
