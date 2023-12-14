@@ -18,19 +18,6 @@ function CommentSection() {
       console.log("can't load recipes");
       console.error(err);
     }
-<<<<<<< HEAD
-    return (
-        <div>
-            <div className="list-grop">
-                {/* {comments.map((comment) => {
-                    <div className="list-group-item">
-                        <div className='d-flex flex-row'>
-                            <h3>{comment.username}</h3>
-                            <h4>{comment.description}</h4>
-                        </div>
-                    </div>
-                })} */}
-=======
   };
 
   useEffect(() => {
@@ -49,25 +36,24 @@ function CommentSection() {
   };
   return (
     <div>
-      <div className="list-grop">
+      <div className="list-group">
         {comments.map((comment) => (
           <div className="list-group-item">
             <div className="d-flex flex-row">
               <h3>{comment.username}</h3>
               <h4>{comment.description}</h4>
->>>>>>> 6e06be1ebae5be0fd9c85e558185f712879b9003
             </div>
           </div>
         ))}
       </div>
-      {/* <div className="d-flex flex-column">
+      <div className="d-flex flex-column">
         <input
           type="text"
           placeholder="Comment Description"
           onChange={(e) => setDecription(e.target.value)}
         />
         <button onClick={currateComment}>Submit</button>
-      </div> */}
+      </div>
     </div>
   );
 }

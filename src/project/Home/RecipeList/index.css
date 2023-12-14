@@ -5,19 +5,17 @@
 .list-group-item.wd-card {
   margin: 2.5px;
   margin-top: 0px;
-  margin-bottom: 0px;
-  padding: 0;
+  margin-bottom: 20px;
   width: 260px;
 }
+
 .card {
   width: 100%;
 }
+
 .popularRecipes h3 {
   margin-bottom: 40px;
-  
-}
-.list-group-item {
-  border-width: 0px;
+
 }
 
 .card-img-top {
@@ -25,8 +23,11 @@
 }
 
 .card-text {
-  height: 70px;
+  height: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
+
 
 .list-group.wd-card-container {
   align-content: space-around;
@@ -38,7 +39,7 @@
   row-gap: 5px;
   display: flex;
   justify-content: center;
-  
+
 }
 
 .popularRecipes {
@@ -49,4 +50,12 @@
   align-items: center;
   font-family: 'Lexend', sans-serif;
   height: 100vh;
+}
+
+.likeButton {
+  margin-top: 20px;
+  border-radius: 2px;
+  background-color: #ff5762;
+  border-style: none;
+  border-color: #ff5762;
 }

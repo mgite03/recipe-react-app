@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import * as RecipeService from "../../services/RecipeService";
-import './index.css';
+import '../RecipeList/index.js';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as AccountService from "../../services/AccountService";
-
 function LikesList() {
   const { currentUser } = useSelector((state) => state.usersReducer);
   const [recipes, setRecipes] = useState([]);
