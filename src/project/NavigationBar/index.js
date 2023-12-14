@@ -35,7 +35,7 @@ function NavigationBar() {
   return (
     <>
       <nav className="navBar py-2">
-        <div className="container d-flex flex-wrap">
+        <div className="container d-flex flex-wrap remove-padding">
           <ul className="nav me-auto">
             <li className="nav-item">
               <a
@@ -71,7 +71,6 @@ function NavigationBar() {
                 <li className="nav-item">
                   <a
                     href="/login" className={`nav-link ${activeLink === "Login" ? "active" : ""}`}
-
                   >
                     Login
                   </a>

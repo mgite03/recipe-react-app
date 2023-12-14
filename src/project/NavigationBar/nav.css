@@ -16,4 +16,6 @@
     color: #FF5762;
 }
 
-
+.container.d-flex.flex-wrap.remove-padding {
+  padding-bottom: 0px;
+}
