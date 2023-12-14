@@ -33,7 +33,8 @@ function LikesList() {
         <><h3 className="mt-5">Your liked recipes</h3>
         <div className="list-group wd-card-container">
           {recipes.map((recipe) => (
-            <div key={recipe.id} className="list-group-item wd-card">
+            <>
+              <div key={recipe.id} className="list-group-item wd-card">
               <Link className="card" to={`/details/${recipe.id}`}>
                 <img
                   className="card-img-top"
@@ -41,18 +42,19 @@ function LikesList() {
                   alt="Card image"
                 />
                   <h5 className="card-text">{recipe.name}</h5>
-                  <button className="likeButton"
-                    onClick={async (e) => {
-                      if (currentUser) {
-                        await AccountService.unlikeRecipe(recipe.id);
-                        window.location.reload(false);
-                      } else {
-                        alert("Must be logged in");
-                      }
-                    }}>Unlike
-                  </button>
-                </Link>
-              </div>
+              </Link>
+              <button className="likeButton"
+                  onClick={async (e) => {
+                    if (currentUser) {
+                      await AccountService.unlikeRecipe(recipe.id);
+                      window.location.reload(false);
+                    } else {
+                      alert("Must be logged in");
+                    }
+                  }}>Unlike
+                </button>
+            </div>
+            </>
           ))}
         </div></>
       )}

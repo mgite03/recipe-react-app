@@ -51,7 +51,9 @@ function RecipeList() {
       <h3 className="mt-5">Popular Recipes This Week</h3>
       <div className="list-group wd-card-container">
         {recipes.map((recipe) => (
+          <>
           <div key={recipe.id} className="list-group-item wd-card">
+            
             <Link className="card" to={`/details/${recipe.id}`}>
               <img
                 className="card-img-top"
@@ -59,7 +61,8 @@ function RecipeList() {
                 alt="Card image"
               />
                 <h5 className="card-text">{recipe.name}</h5>
-                <button className="likeButton"
+              </Link>
+              <button className="likeButton"
                   onClick={async (e) => {
                     if (currentUser && currentUserLikes.includes(recipe.id.toString())) {
                       await AccountService.unlikeRecipe(recipe.id);
@@ -72,8 +75,8 @@ function RecipeList() {
                     }
                   }}><FaHeart/>
                 </button>
-              </Link>
             </div>
+            </>
         ))}
       </div>
     </div>
