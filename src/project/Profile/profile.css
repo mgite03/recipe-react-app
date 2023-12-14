@@ -1,13 +1,12 @@
 .profile-page {
   background-color: #fafaed;
   display: flex;
-  /* height: 100vh; */
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   font-family: "Lexend", sans-serif;
   text-align: center;
 }
-
 
 .accountType {
   font-size: 20px;
