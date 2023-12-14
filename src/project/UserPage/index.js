@@ -73,8 +73,14 @@ const UserPage = () => {
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
-              <button className="btn btn-primary" onClick={() => AccountService.followUser(user.username, currentUser)}>Follow</button>
-                <button className="btn btn-primary" onClick={() => AccountService.unFollowUser(user.username, currentUser)}>Unfollow</button>
+                <button className="btn btn-primary" onClick={() => {
+                  AccountService.followUser(user.username, currentUser)
+                  window.location.reload(false)
+                }}>Follow</button>
+                <button className="btn btn-primary" onClick={() => {
+                  AccountService.unFollowUser(user.username, currentUser)
+                  window.location.reload(false)
+                }}>Unfollow</button>
               </td>
             </tr>
           ))}
@@ -89,7 +95,9 @@ const UserPage = () => {
           <tr>
             <th>Username</th>
             <th>Account Type</th>
-            <th></th>
+            <th>Follows</th>
+            <th>Followers</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -100,7 +108,6 @@ const UserPage = () => {
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
               />
             </td>
-
             <td>
               <select
                 value={user.accountType}
@@ -112,6 +119,8 @@ const UserPage = () => {
                 <option value="Admin">Admin</option>
               </select>
             </td>
+            <td></td>
+            <td></td>
             <td className="buttons">
               <button className="btn btn-primary" onClick={handleUpdate}>
                 Update User
@@ -122,9 +131,17 @@ const UserPage = () => {
             <tr key={user._id}>
               <td>{user.username}</td>
               <td>{user.accountType}</td>
+              <td>{user.follows}</td>
+              <td>{user.followers}</td>
               <td className="buttons">
-                <button className="btn btn-primary" onClick={() => AccountService.followUser(user.username, currentUser)}>Follow</button>
-                <button className="btn btn-primary" onClick={() => AccountService.unFollowUser(user.username, currentUser)}>Unfollow</button>
+                <button className="btn btn-primary" onClick={() => {
+                  AccountService.followUser(user.username, currentUser)
+                  window.location.reload(false)
+                }}>Follow</button>
+                <button className="btn btn-primary" onClick={() => {
+                  AccountService.unFollowUser(user.username, currentUser)
+                  window.location.reload(false)
+                }}>Unfollow</button>
                 <button
                   className="btn btn-secondary"
                   onClick={() => selectUser(user)}
