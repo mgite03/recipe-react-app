@@ -73,8 +73,8 @@ const UserPage = () => {
               <td>{user.follows}</td>
               <td>{user.followers}</td>
               <td>
-                <button className="btn">Follow</button>
-                <button className="btn">Unfollow</button>
+              <button className="btn btn-primary" onClick={() => AccountService.followUser(user.username, currentUser)}>Follow</button>
+                <button className="btn btn-primary" onClick={() => AccountService.unFollowUser(user.username, currentUser)}>Unfollow</button>
               </td>
             </tr>
           ))}
@@ -123,8 +123,8 @@ const UserPage = () => {
               <td>{user.username}</td>
               <td>{user.accountType}</td>
               <td className="buttons">
-                <button className="btn">Follow</button>
-                <button className="btn">Unfollow</button>
+                <button className="btn btn-primary" onClick={() => AccountService.followUser(user.username, currentUser)}>Follow</button>
+                <button className="btn btn-primary" onClick={() => AccountService.unFollowUser(user.username, currentUser)}>Unfollow</button>
                 <button
                   className="btn btn-secondary"
                   onClick={() => selectUser(user)}
