@@ -13,7 +13,7 @@ const options = (text) => {
     params: {
       // prefix: text
       from: '0',
-      size: '20',
+      size: '2',
       q: text
     },
     headers: {

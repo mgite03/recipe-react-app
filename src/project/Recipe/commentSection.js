@@ -77,7 +77,8 @@ function CommentSection() {
                   </tbody>
                 ))}
             </table>
-            <div className="d-flex flex-column ps-5">
+            {currentUser && (
+              <div className="d-flex flex-column ps-5">
                 <textarea
                     className="form-control w-75"
                     type="text"
@@ -85,7 +86,8 @@ function CommentSection() {
                     onChange={(e) => setDecription(e.target.value)}
                 />
                 <button className="searchButton" onClick={currateComment}>Submit</button>
-            </div>
+              </div>
+            )}
         </div>
     );
 }
