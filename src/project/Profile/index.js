@@ -278,11 +278,11 @@ const Profile = () => {
           <br />
 
           <div className="lists">
-            <button onClick={openFollowingModal}>
+            <button className="followingButton" onClick={openFollowingModal}>
               Following: {following.length}
             </button>
             <br></br>
-            <button onClick={openFollowerModal}>
+            <button className="followingButton" onClick={openFollowerModal}>
               Followers: {followers.length}
             </button>
             <br></br>

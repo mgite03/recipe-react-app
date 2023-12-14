@@ -9,6 +9,9 @@
   padding: 0;
   width: 260px;
 }
+.card {
+  width: 100%;
+}
 .popularRecipes h3 {
   margin-bottom: 40px;
   
@@ -35,6 +38,7 @@
   row-gap: 5px;
   display: flex;
   justify-content: center;
+  
 }
 
 .popularRecipes {

@@ -24,7 +24,7 @@ const SearchResults = () => {
 
   const renderRecipe = (recipe) => {
     return (
-      <Link to={`/details/${recipe.id}`} className="col-2">
+      <Link to={`/details/${recipe.id}`} className="list-group-item wd-card">
         <div className="card">
           <img
             className="card-img-top"
