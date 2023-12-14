@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const KEY = process.env.REACT_APP_API_KEY;
+const KEY = process.env.REACT_APP_API_KEY
 const API_BASE = process.env.REACT_APP_API_BASE
 const RECIPE_URL = `${API_BASE}/recipes`;
 const request = axios.create({

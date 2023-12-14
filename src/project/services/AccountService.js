@@ -7,10 +7,9 @@ const request = axios.create({
 
 
 
-//REACT_APP_API_BASE should be something "http://localhost:4000/api/"
+//REACT_APP_API_BASE should be something "http://localhost:4000/api"
 const API_BASE = process.env.REACT_APP_API_BASE;
-const ACCOUNTS_URL = `http://localhost:4000/api/users`;
-
+const ACCOUNTS_URL = `${API_BASE}/users`;
 
 export const createAccount = async (account) => {
   try {
