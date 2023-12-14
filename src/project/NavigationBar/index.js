@@ -58,15 +58,16 @@ function NavigationBar() {
               </a>
             </li>
           </ul>
-          <ul className="nav">
-            <li className="nav-item">
-              <a href="/users" 
-              className={`nav-link ${activeLink === "Users" ? "active" : ""}`}
-              >
-                Users
-              </a>
-            </li>
-          </ul>
+          {currentUser && currentUser.accountType === "Admin" && (
+            <ul className="nav">
+              <li className="nav-item">
+                <a href="/users" 
+                className={`nav-link ${activeLink === "Users" ? "active" : ""}`}>
+                  Users
+                </a>
+              </li>
+            </ul>
+          )}
           {!currentUser && (
             <>
               <ul className="nav">

@@ -6,7 +6,7 @@ function ProtectedContent({ children }) {
   if (currentUser) {
     return children;
   }
-  return null;
+  return <Navigate to="/login" />;
 }
 
 export default ProtectedContent;

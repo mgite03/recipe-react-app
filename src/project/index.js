@@ -12,6 +12,7 @@ import Recipe from "./Recipe";
 import UserPage from "./UserPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedAdminRoute from "./users/protectedAdminRoute";
+import ProtectedContent from "./users/protectedContent";
 
 function Project() {
   return (
@@ -26,17 +27,19 @@ function Project() {
               <Route path="/register" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={
-                <ProtectedAdminRoute>
+                <ProtectedContent>
                   <Profile />
-                </ProtectedAdminRoute>
+                </ProtectedContent>
               } />
               <Route path="/profile/:username" element={<Profile />} />
               <Route path="/search" element={<Search />} />
               <Route path="/search/:searchQuery" element={<SearchResults />} />
               <Route path="/details/:recipeId" element={<Recipe />} />
-              {/* <Route path="/admin" element={<UserPage />} /> */}
               <Route path="/users" 
-                element={<UserPage />} 
+                element={
+                <ProtectedAdminRoute>
+                  <UserPage />
+                </ProtectedAdminRoute>} 
               />
             </Routes>
           </div>

@@ -3,7 +3,8 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedAdminRoute({ children }) {
   const { currentUser } = useSelector((state) => state.usersReducer);
-  if (currentUser) {
+  {console.log(currentUser.accountType)}
+  if (currentUser && currentUser.accountType === "Admin") {
     return children;
   }
   return <Navigate to="/login" />;

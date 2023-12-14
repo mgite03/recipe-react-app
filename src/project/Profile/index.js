@@ -10,7 +10,6 @@ import { current } from "@reduxjs/toolkit";
 import "./profile.css";
 import "./Popup.css";
 import Popup from "./Popup";
-import ProtectedContent from "../users/protectedContent";
 const Profile = () => {
   const { username } = useParams();
   const [user, setUser] = useState(null);
@@ -193,14 +192,12 @@ const Profile = () => {
           title={"Likes"}
         />
       )}
-      <ProtectedContent>
-        {!mode &&
+        {!mode && currentUser &&
           (currentUser && followers.includes(currentUser.username) ? (
             <button className="toFollowButton" onClick={unfollowUser}>Unfollow</button>
           ) : (
             <button className="toFollowButton" onClick={followUser}>Follow</button>
         ))}
-      </ProtectedContent>
 
       {mode && !editState ? (
         <>
