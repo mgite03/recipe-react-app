@@ -269,9 +269,8 @@ const Profile = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
-            ) : (
-              <></>
-            )}
+            ) : <span>{user.username === currentUser.username && ("Password: "+ user.password)}</span>
+            }
           </div>
           {editState ? (
             <div className="editButtons">
