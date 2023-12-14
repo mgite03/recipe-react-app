@@ -322,7 +322,7 @@ const Profile = () => {
             <tbody>
             {commentsList.map((comment, idx) => (
               <tr key={comment.id}>
-                <td>
+                <td className="m-75">
                   <Link to={`../details/${comment.recipeId}`}>
                     {username}: {comment.description}
                     {/* {console.log(getRecipeAt(comment.recipeId).name)}
