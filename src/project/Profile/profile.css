@@ -8,6 +8,7 @@
   text-align: center;
 }
 
+
 .accountType {
   font-size: 20px;
 }
@@ -46,7 +47,6 @@
   border-radius: 45px;
   border-color: #ffca2f;
   margin-bottom: 30px;
-  margin-right: 10px;
 }
 
 .passwordInput {
@@ -57,7 +57,7 @@
   border: 1px black solid;
 }
 
-.followingButton{
+.followingButton {
   height: 40px;
   width: 150px;
   background: #ffca2f;
@@ -97,4 +97,20 @@
 .saveChanges:hover,
 .cancelChanges:hover {
   font-weight: bold;
+}
+
+.accountTypeTitle {
+  font-size: 12px;
+}
+
+.button-group {
+  display: flex;
+  gap: 2px;
+}
+
+.button-group button {
+  border: 0px;
+  border-radius: 5px;
+  height: 40px;
+  width: 125px;
 }

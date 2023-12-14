@@ -3,6 +3,7 @@ import * as searchService from "../services/SearchService";
 import { useEffect, useState } from "react";
 import * as AccountService from "../services/AccountService";
 import { useSelector } from "react-redux";
+import CommentSection from "./commentSection";
 
 function Recipe() {
   const {recipeId} = useParams();
@@ -67,9 +68,9 @@ function Recipe() {
                   {step.display_text}                        
               </li>)}
           </ol>
-          
           {/* {JSON.stringify(details)} */}
       </div>}
+      <CommentSection/>
   </div>);
 }
 export default Recipe;

@@ -24,7 +24,7 @@ const SearchResults = () => {
 
   const renderRecipe = (recipe) => {
     return (
-      <Link to={`/details/${recipe.id}`} className="col-2">
+      <Link to={`/details/${recipe.id}`} className="list-group-item wd-card">
         <div className="card">
           <img
             className="card-img-top"
@@ -33,9 +33,7 @@ const SearchResults = () => {
           />
           <div className="card-body">
             <h5 className="card-title">{recipe.name}</h5>
-            <p className="card-text">
-              {truncateDescription(recipe.description)}
-            </p>
+            
           </div>
         </div>
       </Link>

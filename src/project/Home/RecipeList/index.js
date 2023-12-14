@@ -5,6 +5,7 @@ import { FcLike } from "react-icons/fc";
 import "./index.css";
 import * as RecipeService from "../../services/RecipeService";
 import * as AccountService from "../../services/AccountService";
+import { FaHeart, Faheart } from "react-icons/fa";
 
 function RecipeList() {
   const [recipe, setRecipe] = useState(null);
@@ -54,22 +55,18 @@ function RecipeList() {
                 src={recipe.thumbnail_url}
                 alt="Card image"
               />
-              <div className="card-body">
                 <h5 className="card-text">{recipe.name}</h5>
-                <button
+                <button className="likeButton"
                   onClick={(e) => {
                     if (currentUser) {
                       AccountService.likeRecipe(recipe.id, currentUser);
                     } else {
                       alert("Must be loggeed in");
                     }
-                  }}
-                >
-                  Like
+                  }}><FaHeart/>
                 </button>
               </div>
             </div>
-          </div>
         ))}
       </div>
     </div>
